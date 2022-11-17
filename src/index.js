@@ -7,7 +7,7 @@ $(() => {
   $(document).on('submit', () => {
     const user = {
       email: $('#emailInput').val(),
-      name: $('#userInput').val(),
+      nickName: $('#userInput').val(),
       password: $('#passwordInput').val()
     }
     createUser(user);
