@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { createUser } from './rest';
+import { createMessage } from './rest';
 import { openConnection, sendPlainMessage } from './sockets';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,8 +13,15 @@ $(() => {
     }
     createUser(user);
   })
+  
 
   $("#send-btn").on("click", () => {
+    const Message = {
+      //id: $('#emailInput').val(),
+      //sender: $('#userInput').val(),
+      content: $('#message-input').val()
+    }
+    createMessage(Message);
     sendPlainMessage("MyUser", $('#message-input').val())
   })
 
