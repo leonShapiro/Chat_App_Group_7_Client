@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome CDN  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../home.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <main class="row m-auto shadow bg-white px-0 rounded-3">
+      <div class="col">
+        <form
+          action="./signIn.html"
+          class="d-flex flex-column justify-content-around align-items-center h-100">
+          <h2 class="text-center display-2 text-white">
+            Sing in to your account.
+          </h2>
+          <button
+            type="submit"
+            class="btn btn-info shadow btn-lg rounded-pill w-100"
+          >
+            Sign In
+          </button>
+          <i class="fa-solid fa-user-lock fa-10x text-white"></i>
+        </form>
+      </div>
+      <div class="col bg-dark">
+        <form
+          action="./registration.html"
+          class="d-flex flex-column justify-content-around align-items-center h-100"
+        >
+          <h2 class="text-center display-2">Register a new account.</h2>
+          <button
+            type="submit"
+            class="btn btn-danger shadow btn-lg rounded-pill w-100"
+          >
+            Register
+          </button>
+          <i class="fa-solid fa-id-card fa-10x"></i>
+        </form>
+      </div>
+    </main>
+    <!-- Bootstrap JS CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const buttons = document.querySelectorAll("button");
+      //   console.log(typeof buttons);
+
+      (function () {
+        // console.log("function");
+        Object.keys(buttons).map((key, button) =>
+          onMouseOverAndOut(buttons[key])
+        );
+        function onMouseOverAndOut(element) {
+          element.onmouseover = (e) => {
+            // console.log(e);
+            classToggler(e);
+          };
+          element.onmouseleave = (e) => {
+            // console.log(e);
+            classToggler(e);
+          };
+        }
+
+        function classToggler(e) {
+          console.log(e.target.parentElement.parentElement);
+          e.target.classList.toggle("btn-light");
+          e.target.parentElement.parentElement.classList.toggle("bg-dark");
+        }
+      })();
+    </script>
+  </body>
+</html>
