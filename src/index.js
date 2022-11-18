@@ -23,6 +23,7 @@ $(() => {
     }
     createMessage(Message);
     sendPlainMessage("MyUser", $('#message-input').val())
+    document.getElementById('message-input').value = ""
   })
 
 })
