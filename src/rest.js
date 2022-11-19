@@ -15,3 +15,15 @@ const createUser = (user) => {
 };
 
 export { createUser };
+  const createMessage = (message) => {
+    fetch(serverAddress + "/message", {
+      method: 'POST',
+      body: JSON.stringify({ content : message.content }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+
+export{createUser}
+export{createMessage}
