@@ -1,8 +1,3 @@
-import $ from "jquery";
-import { createUser } from "./rest";
-import { openConnection, sendPlainMessage } from "./sockets";
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import $ from 'jquery'
 import { createUser } from './rest';
 import { createMessage } from './rest';
@@ -18,15 +13,7 @@ $(() => {
       password: $("#passwordInput").val(),
     };
     createUser(user);
-  });
-
-  $("#send-btn").on("click", () => {
-    sendPlainMessage("MyUser", $("#message-input").val());
-  });
-});
-
   })
-  
 
   $("#send-btn").on("click", () => {
     const Message = {
@@ -38,7 +25,6 @@ $(() => {
     sendPlainMessage("MyUser", $('#message-input').val())
     document.getElementById('message-input').value = ""
   })
-
 })
 
 openConnection();

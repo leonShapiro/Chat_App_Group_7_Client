@@ -12,18 +12,16 @@ const createUser = (user) => {
       "Content-Type": "application/json",
     },
   });
-};
+} 
 
-export { createUser };
-  const createMessage = (message) => {
-    fetch(serverAddress + "/message", {
-      method: 'POST',
-      body: JSON.stringify({ content : message.content }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-  }
+const createMessage = (message) => {
+  fetch(serverAddress + "/message", {
+    method: 'POST',
+    body: JSON.stringify({ content : message.content }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+}
 
-export{createUser}
-export{createMessage}
+export{createUser,createMessage}
