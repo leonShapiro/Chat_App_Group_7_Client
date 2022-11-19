@@ -3,7 +3,7 @@ a {
 }
 
 :root {
-  --bodyBg: #ccc;
+  --bodyBg: rgb(32, 30, 30);
   --gmail: rgb(219, 68, 55);
   --customGray: #e6d6f6;
   --facebook: rgba(59, 89, 152);
