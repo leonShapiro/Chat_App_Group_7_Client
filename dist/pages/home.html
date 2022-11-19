@@ -23,36 +23,70 @@
     <title>Home</title>
   </head>
   <body>
-    <main class="row m-auto shadow bg-white px-0 rounded-3">
+    <main class="row m-auto shadow bg-white px-0 rounded-3 h-40 ">
       <div class="col">
-        <form
-          action="./signIn.html"
-          class="d-flex flex-column justify-content-around align-items-center h-100">
+        <form 
+        action="welcome.html"
+          class="d-flex flex-column justify-content-around align-items-center h-40">
           <h2 class="text-center display-2 text-white">
-            Sing in to your account.
+          <h2 class="text-center mb-5"></h2>
+                <div class="d-flex px-0">
+            <i class="fa-solid "></i>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Username of email"
+              id="validationCustom01"
+              required
+            />
+          </div>
+          <div class="d-flex p-0 mb-4">
+            <i class="fa-solid "></i>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              id="validationCustom02"
+              required
+            />
+          </div>
+            
           </h2>
           <button
             type="submit"
             class="btn btn-info shadow btn-lg rounded-pill w-100"
           >
             Sign In
-          </button>
-          <i class="fa-solid fa-user-lock fa-10x text-white"></i>
+          </button></form>
+          <form action="./registration.html">
+          <h3 class="d-flex p-5 mb-0 fa-1x">Don't have an account yet?</h3> 
+        <button type="submit" class="btn btn-dark shadow w-25 rounded-pill d-flex"> Register</button>
+          <i class=" fa-5x text-white h-200"></i>
         </form>
       </div>
       <div class="col bg-dark">
         <form
           action="./registration.html"
-          class="d-flex flex-column justify-content-around align-items-center h-100"
-        >
-          <h2 class="text-center display-2">Register a new account.</h2>
+          class="d-flex flex-column justify-content-around align-items-center h-50" >
+          <h2 class="text-center display-2"><img src="../anonymos.png" width="200" height="200"></h2></h2>
+          <i class="fa-solid  fa-120x"></i>
+  <div class="d-flex p-0 mb-4 ">
+            <i class="fa-solid "></i>
+            <input class="bg-black"
+              type="text"
+              class="form-control"
+              placeholder="Enter a nickname"
+              required
+            />
+          </div>
           <button
             type="submit"
             class="btn btn-danger shadow btn-lg rounded-pill w-100"
           >
-            Register
+            Login as a Guest
           </button>
-          <i class="fa-solid fa-id-card fa-10x"></i>
+          <i class="fa-solid  fa-0x"></i>
+
         </form>
       </div>
     </main>
@@ -67,17 +101,17 @@
       //   console.log(typeof buttons);
 
       (function () {
-        // console.log("function");
+         console.log("function");
         Object.keys(buttons).map((key, button) =>
           onMouseOverAndOut(buttons[key])
         );
         function onMouseOverAndOut(element) {
           element.onmouseover = (e) => {
-            // console.log(e);
+            console.log(e);
             classToggler(e);
           };
           element.onmouseleave = (e) => {
-            // console.log(e);
+            console.log(e);
             classToggler(e);
           };
         }
