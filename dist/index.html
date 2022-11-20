@@ -1,43 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome CDN  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../home.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <main class="row m-auto shadow bg-white px-0 rounded-3 h-40 ">
+      <div class="col">
+        <form 
+          action="./chat.html"
+          class="d-flex flex-column justify-content-around align-items-center h-40">
+          <h2 class="text-center display-2 text-white">
+          <h2 class="text-center mb-5"></h2>
+                <div class="d-flex px-0">
+            <i class="fa-solid "></i>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email"
+              id="email"
+              required
+            />
+          </div>
+          <div class="d-flex p-0 mb-4">
+            <i class="fa-solid "></i>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              id="password"
+              required
+            />
+          </div>
+            
+          </h2>
+          <button
+            type="submit"
+            class="btn btn-info shadow btn-lg rounded-pill w-100"
+          >
+            Sign In
+          </button></form>
 
-<head>
-  <meta charset="utf-8" />
-  <title>Getting Started</title>
-</head>
-
-<body>
-  <div class="container">
-    <br>
-    <div class="row">
-      <div class="col-3">
-        <script src="main.js"></script>
-        <form id="signup">
-          <div class="mb-3">
-            <label for="emailInput" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="emailInput">
-          </div>
-          <div class="mb-3">
-            <label for="userInput" class="form-label">Name</label>
-            <input type="text" class="form-control" id="userInput">
-          </div>
-          <div class="mb-3">
-            <label for="passwordInput" class="form-label">Password</label>
-            <input type="password" class="form-control" id="passwordInput">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <form action="./pages/registration.html">
+          <h3 class="d-flex p-5 mb-0 fa-1x">Don't have an account yet?</h3> 
+        <button type="submit" class="btn btn-dark shadow w-25 rounded-pill d-flex"> Register</button>
+          <i class=" fa-5x text-white h-200"></i>
         </form>
       </div>
-      <div class="col-9">
-        <textarea class="form-control" id="main-chat" rows="20"></textarea>
-        <div class="input-group mb-3">
-          <input type="text" id="message-input" class="form-control" placeholder="Type your message here..." aria-describedby="send-btn">
-          <button class="btn btn-outline-secondary" type="button" id="send-btn">Send</button>
-        </div>
+      <div class="col bg-dark">
+        <form
+          action="./registration.html"
+          class="d-flex flex-column justify-content-around align-items-center h-50" >
+          <h2 class="text-center display-2"><img src="../anonymos.png" width="200" height="200"></h2></h2>
+          <i class="fa-solid  fa-120x"></i>
+  <div class="d-flex p-0 mb-4 ">
+            <i class="fa-solid "></i>
+            <input class="bg-black"
+              type="text"
+              class="form-control"
+              placeholder="Enter a nickname"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-danger shadow btn-lg rounded-pill w-100"
+          >
+            Login as a Guest
+          </button>
+          <i class="fa-solid  fa-0x"></i>
+        </form>
       </div>
-    </div>
-  </div>
+    </main>
+    <!-- Bootstrap JS CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const buttons = document.querySelectorAll("button");
+      //   console.log(typeof buttons);
 
-</body>
+      (function () {
+         console.log("function");
+        Object.keys(buttons).map((key, button) =>
+          onMouseOverAndOut(buttons[key])
+        );
+        function onMouseOverAndOut(element) {
+          element.onmouseover = (e) => {
+            console.log(e);
+            classToggler(e);
+          };
+          element.onmouseleave = (e) => {
+            console.log(e);
+            classToggler(e);
+          };
+        }
 
+        function classToggler(e) {
+          console.log(e.target.parentElement.parentElement);
+          e.target.classList.toggle("btn-light");
+          e.target.parentElement.parentElement.classList.toggle("bg-dark");
+        }
+      })();
+    </script>
+
+  </body>
 </html>

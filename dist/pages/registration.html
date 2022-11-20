@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,42 +17,35 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
       integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
       crossorigin="anonymous"
-      referrerpolicy="no-referrer"  
-    
-    />
-
-
+      referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="../registration.css" />
     <title>Register</title>
   </head>
   <body>
     <main class="row flex-row-reverse m-auto shadow bg-white px-0 rounded-3">
  <div class="col">
-    <form>
-  <div class="container">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
- <label for="psw"><b>Name</b></label>
-    <input type="text" placeholder="Please enter your nickname" name="name" id="name" required>
-
-    <label for="psw"><b>Birthday</b></label>
-    <input type="date" placeholder="Enter your birthday" name="birthday" id="birthday" >
-
- 
-  <button
-            type="submit"
-            class="btn btn-dark shadow btn-lg rounded-pill px-1 w-10"
-          >
-            Register
-          </button>
+   <div class="container">
+    <br>
+    <div class="row">
+      <div class="col-3">
+        <script src="main.js"></script>
+        <form id="signup">
+          <div class="mb-3">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailInput">
+          </div>
+          <div class="mb-3">
+            <label for="userInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="userInput">
+          </div>
+          <div class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passwordInput">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
   </div>
 </div>
@@ -67,6 +60,5 @@
 </form>
 </script>
 </main>
-  <script src="../registration.js"></script>
   </body>
 </html>
