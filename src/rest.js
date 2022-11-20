@@ -35,7 +35,6 @@ const loginUser = (user) => {
       "Content-Type": "application/json",
     },
   });
-  window.alert("sometext2222222222");
 } 
 
 export{createUser,createMessage,loginUser}

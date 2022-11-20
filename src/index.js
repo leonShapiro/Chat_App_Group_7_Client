@@ -1,35 +1,17 @@
 import $ from 'jquery'
-import { createUser, loginUser } from './rest';
-import { createMessage } from './rest';
+import { createUser ,loginUser,createMessage} from './rest';
 import { openConnection, sendPlainMessage } from './sockets';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 $(() => {
-  // $("document").on("submit", () => {
   $("#reg-btn").on("click", () => {
     const user = {
       email: $("#emailInput").val(),
       nickName: $("#userInput").val(),
       password: $("#passwordInput").val(),
-    };
+    }
     createUser(user);
-  });
-});
-
-$("#send-btn").on("click", () => {
-  sendPlainMessage("MyUser", $("#message-input").val());
-});
-
-$("#guest-send-btn").on("click", () => {
-  const guest = {
-    nickName: $("nickName").val(),
-  };
-  createGuest(guest);
-});
-
-openConnection();
-
   })
 
   $("#send-btn").on("click", () => {
@@ -43,17 +25,14 @@ openConnection();
     document.getElementById('message-input').value = ""
   })
 
-
-    
-  $("#signin-btn").on("click", () => {
+  $("#login-btn").on("click", () => {
     const user = {
-      email: $('#email').val(),
-      password: $('#password').val(),
+      email: $('#emailInput').val(),
+      password: $('#passwordInput').val(),
     };
-    window.alert("31233123123123");
-    loginUser(user)
-  })
-  //window.alert("sometext2222222222");
-})
+    loginUser(user);
+    window.location.replace("./pages/chat.html")
+  });
 
+})
 openConnection();
