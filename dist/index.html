@@ -11,6 +11,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <!-- Font Awesome CDN  -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
@@ -24,50 +25,23 @@
   <body>
     <main class="row m-auto shadow bg-white px-0 rounded-3 h-40 ">
       <div class="col">
-
-        <form id = "loginForm"
-          action="./chat.html"
-          class="d-flex flex-column justify-content-around align-items-center h-40">
-          <h2 class="text-center display-2 text-white">
-          <h2 class="text-center mb-5"></h2>
-                <div class="d-flex px-0">
-            <i class="fa-solid "></i>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="Email"
-              id="email"
-              required
-            />
-
-          <form id="signup" action="./pages/chat.html">
+          <form id="signIn" action="./pages/chat.html">
           <div class="mb-3">
             <label for="emailInput" class="form-label">Email address</label>
             <input type="email" class="form-control" id="emailInput">
-
           </div>
           <div class="mb-3">
             <label for="passwordInput" class="form-label">Password</label>
             <input type="password" class="form-control" id="passwordInput">
           </div>
-
-            
-          </h2>
-          <button id="signin-btn" type="button" class="btn btn-info shadow btn-lg rounded-pill w-100" >Sign In</button>
+          <button id="login-btn" type="button" class="btn btn-primary">Login</button>
         </form>
-
-
-          <button id="submit" type="submit" class="btn btn-primary">Login</button>
-        </form>
-         
-
           <form action="./pages/registration.html">
-          <h3 class="d-flex p-5 mb-0 fa-1x">Don't have an account yet?</h3> 
+          <h3 class="d-flex p-5 mb-0 fa-1x">Don't have an account yet?</h3>
         <button type="submit" class="btn btn-dark shadow w-25 rounded-pill d-flex"> Register</button>
           <i class=" fa-5x text-white h-200"></i>
         </form>
       </div>
-
       <div class="col bg-dark">
         <form
           action="./registration.html"
@@ -76,23 +50,20 @@
           <i class="fa-solid  fa-120x"></i>
   <div class="d-flex p-0 mb-4 ">
             <i class="fa-solid "></i>
-            <input class="bg-black"
-              type="text"
-              class="form-control"
-              placeholder="Enter a nickname"
-              required
-            />
+             <div class="mb-3">
+            <label for="nickname" class="form-label">Nickname</label>
+            <input type="text" class="form-control" id="nicknameInput">
+          </div>
           </div>
           <button
             type="submit"
             class="btn btn-danger shadow btn-lg rounded-pill w-100"
-            id="guest-send-btn"
-          >
+            id="guest-send-btn">
             Login as a Guest
           </button>
           <i class="fa-solid  fa-0x"></i>
         </form>
-
+      </div>
     </main>
     <!-- Bootstrap JS CDN -->
     <script
@@ -103,7 +74,6 @@
     <script>
       const buttons = document.querySelectorAll("button");
       //   console.log(typeof buttons);
-
       (function () {
          console.log("function");
         Object.keys(buttons).map((key, button) =>
@@ -119,7 +89,6 @@
             classToggler(e);
           };
         }
-
         function classToggler(e) {
           console.log(e.target.parentElement.parentElement);
           e.target.classList.toggle("btn-light");
@@ -127,31 +96,6 @@
         }
       })();
     </script>
-
-
-
-   <div class="container">
-    <br>
-    <div class="row">
-      <div class="col-3">
-        <script src="main.js"></script>
-        <form id="signup">
-          <div class="mb-3">
-            <label for="emailInput" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="emailInput">
-          </div>
-          <div class="mb-3">
-            <label for="userInput" class="form-label">Name</label>
-            <input type="text" class="form-control" id="userInput">
-          </div>
-          <div class="mb-3">
-            <label for="passwordInput" class="form-label">Password</label>
-            <input type="password" class="form-control" id="passwordInput">
-          </div>
-          <button  id="submit-reg" type="submit" class="btn btn-primary">Submit</button>
-        </form>
-  </div>
-</div>
-
+    <script src="main.js"></script>
   </body>
 </html>
