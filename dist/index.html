@@ -25,7 +25,7 @@
     <main class="row m-auto shadow bg-white px-0 rounded-3 h-40 ">
       <div class="col">
         <form 
-          action="./chat.html"
+          action="./pages/chat.html"
           class="d-flex flex-column justify-content-around align-items-center h-40">
           <h2 class="text-center display-2 text-white">
           <h2 class="text-center mb-5"></h2>
@@ -83,6 +83,7 @@
           <button
             type="submit"
             class="btn btn-danger shadow btn-lg rounded-pill w-100"
+            id="guest-send-btn"
           >
             Login as a Guest
           </button>
@@ -130,6 +131,31 @@
         }
       })();
     </script>
+
+
+
+   <div class="container">
+    <br>
+    <div class="row">
+      <div class="col-3">
+        <script src="main.js"></script>
+        <form id="signup">
+          <div class="mb-3">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailInput">
+          </div>
+          <div class="mb-3">
+            <label for="userInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="userInput">
+          </div>
+          <div class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" class="form-control" id="passwordInput">
+          </div>
+          <button   type="submit" class="btn btn-primary">Submit</button>
+        </form>
+  </div>
+</div>
 
   </body>
 </html>
