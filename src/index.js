@@ -5,7 +5,8 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 $(() => {
-  $(document).on("submit", () => {
+  // $("document").on("submit", () => {
+  $("#reg-btn").on("click", () => {
     const user = {
       email: $("#emailInput").val(),
       nickName: $("#userInput").val(),
@@ -13,9 +14,17 @@ $(() => {
     };
     createUser(user);
   });
-
-  $("#send-btn").on("click", () => {
-    sendPlainMessage("MyUser", $("#message-input").val());
-  });
 });
+
+$("#send-btn").on("click", () => {
+  sendPlainMessage("MyUser", $("#message-input").val());
+});
+
+$("#guest-send-btn").on("click", () => {
+  const guest = {
+    nickName: $("nickName").val(),
+  };
+  createGuest(guest);
+});
+
 openConnection();
