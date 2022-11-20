@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import { createUser } from './rest';
+import { createUser, loginUser } from './rest';
 import { createMessage } from './rest';
 import { openConnection, sendPlainMessage } from './sockets';
 import 'bootstrap';
@@ -42,6 +42,18 @@ openConnection();
     sendPlainMessage("MyUser", $('#message-input').val())
     document.getElementById('message-input').value = ""
   })
+
+
+    
+  $("#signin-btn").on("click", () => {
+    const user = {
+      email: $('#email').val(),
+      password: $('#password').val(),
+    };
+    window.alert("31233123123123");
+    loginUser(user)
+  })
+  //window.alert("sometext2222222222");
 })
 
 openConnection();
