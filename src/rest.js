@@ -24,4 +24,18 @@ const createMessage = (message) => {
   })
 }
 
-export{createUser,createMessage}
+const loginUser = (user) => {
+  fetch(serverAddress + "/auth/login", {
+    method: "POST",
+    body: JSON.stringify({
+      email: user.email,
+      password: user.password,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  window.alert("sometext2222222222");
+} 
+
+export{createUser,createMessage,loginUser}
