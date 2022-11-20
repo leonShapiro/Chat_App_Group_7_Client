@@ -22,15 +22,15 @@
     <title>Register</title>
   </head>
   <body>
+
     <main class="row flex-row-reverse m-auto shadow bg-white px-0 rounded-3">
+      <h1 class="align-items-center ">Registration</h1>
  <div class="col">
-
-
    <div class="container">
     <br>
     <div class="row">
       <div class="col-3">
-        <script src="main.js"></script>
+        <script src="../main.js"></script>
         <form id="signup">
           <div class="mb-3">
             <label for="emailInput" class="form-label">Email address</label>
@@ -44,9 +44,13 @@
             <label for="passwordInput" class="form-label">Password</label>
             <input type="password" class="form-control" id="passwordInput">
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
 
+      <div class="mb-3">
+            <label for="birthdayInput" class="form-label">Birthday</label>
+            <input type="date" class="form-control" id="birthdayInput">
+          </div>
+          <button class="btn btn-outline-secondary" type="button" id="reg-btn">Register</button>
+        </form>
   </div>
 </div>
       <script> 
