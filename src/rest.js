@@ -3,7 +3,7 @@ import { serverAddress } from "./constants";
 
 
 const createUser = (user) => {
-  fetch(serverAddress + "/user", {
+  fetch(serverAddress +"/user/guest", {
     method: "POST",
     body: JSON.stringify({
       nickName: user.nickName,
@@ -16,6 +16,21 @@ const createUser = (user) => {
   });
 };
 
+
+const createGuest = (user) => {
+  fetch(serverAddress + "/user/guest", {
+    method: "POST",
+    body: JSON.stringify({
+      nickName: user.nickName,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+
+
 const createMessage = (message) => {
   fetch(serverAddress + "/message", {
     method: "POST",
@@ -27,7 +42,6 @@ const createMessage = (message) => {
 };
 
 const loginUser = (user) => {
-  window.alert(user.email);
   fetch(serverAddress + "/auth/login", {
     method: "POST",
     body: JSON.stringify({
@@ -39,4 +53,4 @@ const loginUser = (user) => {
     },
   });
 };
-export { createUser, createMessage, loginUser };
+export { createUser, createMessage, loginUser,createGuest };
