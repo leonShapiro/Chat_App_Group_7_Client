@@ -27,7 +27,7 @@ const createGuest = (user) => {
 };
 
 
-const createMessage = (message) => {
+const createMessage = (token,message) => {
   fetch(serverAddress + "/message/create", {
     method: "POST",
     body: JSON.stringify({ 
@@ -51,7 +51,8 @@ const loginUser = (user) => {
     headers: {
       "Content-Type": "application/json",
     },
-  });
+  })
+
   fetchPromise.then((Response) => {
     if(Response.ok){
       Response.text().then((text) => {
@@ -59,7 +60,6 @@ const loginUser = (user) => {
       })
     }
   })
-};
-
-export { createUser, createMessage, loginUser,createGuest }
+} 
+export{createUser,createMessage,loginUser,createGuest}
 

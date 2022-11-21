@@ -1,11 +1,11 @@
 import $ from "jquery";
 import { createUser, loginUser, createMessage, createGuest } from "./rest";
 import { openConnection, sendPlainMessage,getAllMesseges } from "./sockets";
-
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 $(() => {
+
   $("#reg-btn").on("click", () => {
     const user = {
       email: $("#emailInput").val(),
@@ -43,17 +43,10 @@ $(() => {
   $("#export-btn").on("click", () => {
     const messages = getAllMesseges();
   var jsonObj = messages.map(o => Object.values(o).join(' : '));
-
   var jsonObject = JSON.stringify(jsonObj,null,"\t");
-
-
-
-console.log(jsonObject);
-
+  console.log(jsonObject);
   downloadCSV(jsonObject);
-
   });
-
 
 function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
