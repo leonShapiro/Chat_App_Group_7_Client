@@ -1,7 +1,7 @@
 import { serverAddress } from "./constants";
 
 const createUser = (user) => {
-  fetch(serverAddress +"/user/guest", {
+  fetch(serverAddress +"/user", {
     method: "POST",
     body: JSON.stringify({
       nickName: user.nickName,
@@ -28,7 +28,7 @@ const createGuest = (user) => {
 
 
 const createMessage = (message) => {
-  fetch(serverAddress + "/message", {
+  fetch(serverAddress + "/message/create", {
     method: "POST",
     body: JSON.stringify({ 
     token: token,
@@ -52,10 +52,6 @@ const loginUser = (user) => {
       "Content-Type": "application/json",
     },
   });
-};
-export { createUser, createMessage, loginUser,createGuest };
-  })
-
   fetchPromise.then((Response) => {
     if(Response.ok){
       Response.text().then((text) => {
@@ -63,6 +59,7 @@ export { createUser, createMessage, loginUser,createGuest };
       })
     }
   })
-} 
-export{createUser,createMessage,loginUser}
+};
+
+export { createUser, createMessage, loginUser,createGuest }
 
