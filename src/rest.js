@@ -1,5 +1,7 @@
 import { serverAddress } from "./constants";
 
+
+
 const createUser = (user) => {
   fetch(serverAddress + "/user", {
     method: "POST",
@@ -12,29 +14,29 @@ const createUser = (user) => {
       "Content-Type": "application/json",
     },
   });
-} 
+};
 
 const createMessage = (message) => {
   fetch(serverAddress + "/message", {
-    method: 'POST',
-    body: JSON.stringify({ content : message.content }),
+    method: "POST",
+    body: JSON.stringify({ content: message.content }),
     headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-}
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 const loginUser = (user) => {
+  window.alert(user.email);
   fetch(serverAddress + "/auth/login", {
     method: "POST",
     body: JSON.stringify({
       email: user.email,
-      password: user.password,
+      password: user.password
     }),
     headers: {
       "Content-Type": "application/json",
     },
   });
-} 
-
-export{createUser,createMessage,loginUser}
+};
+export { createUser, createMessage, loginUser };
