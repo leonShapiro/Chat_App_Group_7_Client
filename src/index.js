@@ -33,6 +33,5 @@ $(() => {
     loginUser(user);
     window.location.replace("./pages/chat.html")
   });
-
 })
 openConnection();
