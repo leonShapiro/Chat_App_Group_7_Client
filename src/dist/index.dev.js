@@ -16,10 +16,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
   (0, _jquery["default"])("#reg-btn").on("click", function () {
     var user = {
       email: (0, _jquery["default"])("#emailInput").val(),
-      nickName: (0, _jquery["default"])("#userInput").val(),
+      nickName: (0, _jquery["default"])("#nicknameInput").val(),
       password: (0, _jquery["default"])("#passwordInput").val()
     };
     (0, _rest.createUser)(user);
+  });
+  (0, _jquery["default"])("#reg-geust-btn").on("click", function () {
+    var user = {
+      nickName: (0, _jquery["default"])("#nicknameInput").val()
+    };
+    (0, _rest.createGuest)(user);
   });
   (0, _jquery["default"])("#send-btn").on("click", function () {
     var Message = {
@@ -32,7 +38,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
     document.getElementById("message-input").value = "";
   });
   (0, _jquery["default"])("#login-btn").on("click", function () {
-    window.alert("Dsa");
     var user = {
       email: (0, _jquery["default"])("#emailInput").val(),
       password: (0, _jquery["default"])("#passwordInput").val()
@@ -42,14 +47,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
   });
   (0, _jquery["default"])("#export-btn").on("click", function () {
     var messages = (0, _sockets.getAllMesseges)();
-    var jsonObject = JSON.stringify(messages, null, "\t");
+    var jsonObj = messages.map(function (o) {
+      return Object.values(o).join(' : ');
+    });
+    var jsonObject = JSON.stringify(jsonObj, null, "\t");
+    console.log(jsonObject);
     downloadCSV(jsonObject);
   });
 
   function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
-    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
-    hiddenElement.target = "_blank";
+    hiddenElement.href = "data:text/csv;" + encodeURI(csvStr);
     hiddenElement.download = "Exported chat.csv";
     hiddenElement.click();
   }
