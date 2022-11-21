@@ -1,7 +1,7 @@
 import { serverAddress } from "./constants";
 
 const createUser = (user) => {
-  fetch(serverAddress +"/user", {
+  fetch(serverAddress + "/user", {
     method: "POST",
     body: JSON.stringify({
       nickName: user.nickName,
