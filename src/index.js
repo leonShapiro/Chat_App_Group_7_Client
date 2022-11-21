@@ -9,7 +9,7 @@ $(() => {
   $("#reg-btn").on("click", () => {
     const user = {
       email: $("#emailInput").val(),
-      nickName: $("#nicknameInput").val(),
+      nickName: $("#userInput").val(),
       password: $("#passwordInput").val(),
     };
     createUser(user);
@@ -37,20 +37,19 @@ $(() => {
       password: $("#passwordInput").val(),
     };
     loginUser(user);
-    window.location.replace("./pages/chat.html");
   });
 
   $("#export-btn").on("click", () => {
     const messages = getAllMesseges();
   var jsonObj = messages.map(o => Object.values(o).join(' : '));
   var jsonObject = JSON.stringify(jsonObj,null,"\t");
-  console.log(jsonObject);
   downloadCSV(jsonObject);
   });
 
 function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
-    hiddenElement.href = "data:text/csv;" + encodeURI(csvStr);
+    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
+    hiddenElement.target = "_blank";
     hiddenElement.download = "Exported chat.csv";
     hiddenElement.click();
   }

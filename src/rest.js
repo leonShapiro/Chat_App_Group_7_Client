@@ -26,7 +26,6 @@ const createGuest = (user) => {
   });
 };
 
-
 const createMessage = (token,message) => {
   fetch(serverAddress + "/message/create", {
     method: "POST",
@@ -41,7 +40,7 @@ const createMessage = (token,message) => {
 };
 
 const loginUser = (user) => {
-  const fetchPromise = 
+  const loginFetchPromise = 
   fetch(serverAddress + "/auth/login", {
     method: "POST",
     body: JSON.stringify({
@@ -53,10 +52,12 @@ const loginUser = (user) => {
     },
   })
 
-  fetchPromise.then((Response) => {
+  loginFetchPromise.then((Response) => {
     if(Response.ok){
       Response.text().then((text) => {
+        window.alert("66666666666666")
         sessionStorage.setItem("token",text)
+        window.location.replace("./pages/chat.html");
       })
     }
   })
