@@ -16,10 +16,13 @@ const createUser = (user) => {
   });
 };
 
-const createMessage = (message) => {
-  fetch(serverAddress + "/message", {
+const createMessage = (token,message) => {
+  fetch(serverAddress + "/message/create", {
     method: "POST",
-    body: JSON.stringify({ content: message.content }),
+    body: JSON.stringify({ 
+    token: token,
+    content :message
+   }),
     headers: {
       "Content-Type": "application/json",
     },

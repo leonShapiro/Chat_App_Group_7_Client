@@ -16,18 +16,15 @@ $(() => {
   });
 
   $("#send-btn").on("click", () => {
-    const Message = {
-      //id: $('#emailInput').val(),
-      //sender: $('#userInput').val(),
-      content: $("#message-input").val(),
-    };
-    createMessage(Message);
+    const message = $("#message-input").val()
+    const token = sessionStorage.getItem("token")
+  
+    createMessage(token,message);
     sendPlainMessage("MyUser", $("#message-input").val());
     document.getElementById("message-input").value = "";
   });
 
   $("#login-btn").on("click", () => {
-    window.alert("Dsa");
     const user = {
       email: $("#emailInput").val(),
       password: $("#passwordInput").val(),
