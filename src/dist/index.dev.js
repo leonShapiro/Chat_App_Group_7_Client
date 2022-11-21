@@ -51,7 +51,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
       return Object.values(o).join(' : ');
     });
     var jsonObject = JSON.stringify(jsonObj, null, "\t");
-    console.log(jsonObject);
     downloadCSV(jsonObject);
   });
 

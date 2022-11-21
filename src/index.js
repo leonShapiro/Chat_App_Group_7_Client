@@ -45,13 +45,7 @@ $(() => {
   $("#export-btn").on("click", () => {
     const messages = getAllMesseges();
   var jsonObj = messages.map(o => Object.values(o).join(' : '));
-
   var jsonObject = JSON.stringify(jsonObj,null,"\t");
-
-
-
-console.log(jsonObject);
-
   downloadCSV(jsonObject);
 
   });
