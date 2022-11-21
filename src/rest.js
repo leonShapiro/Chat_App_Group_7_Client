@@ -55,7 +55,6 @@ const loginUser = (user) => {
   loginFetchPromise.then((Response) => {
     if(Response.ok){
       Response.text().then((text) => {
-        window.alert("66666666666666")
         sessionStorage.setItem("token",text)
         window.location.replace("./pages/chat.html");
       })
