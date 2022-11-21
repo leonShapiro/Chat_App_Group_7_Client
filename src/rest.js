@@ -55,7 +55,10 @@ const loginUser = (user) => {
   loginFetchPromise.then((Response) => {
     if(Response.ok){
       Response.text().then((text) => {
-        sessionStorage.setItem("token",text)
+
+        const myArray = text.split(":");
+        sessionStorage.setItem("nickName",myArray[0])
+        sessionStorage.setItem("token",myArray[1])
         window.location.replace("./pages/chat.html");
       })
     }
