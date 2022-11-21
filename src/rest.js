@@ -1,7 +1,5 @@
 import { serverAddress } from "./constants";
 
-
-
 const createUser = (user) => {
   fetch(serverAddress +"/user/guest", {
     method: "POST",
@@ -16,7 +14,6 @@ const createUser = (user) => {
   });
 };
 
-
 const createGuest = (user) => {
   fetch(serverAddress + "/user/guest", {
     method: "POST",
@@ -30,11 +27,13 @@ const createGuest = (user) => {
 };
 
 
-
 const createMessage = (message) => {
   fetch(serverAddress + "/message", {
     method: "POST",
-    body: JSON.stringify({ content: message.content }),
+    body: JSON.stringify({ 
+    token: token,
+    content :message
+   }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -42,7 +41,6 @@ const createMessage = (message) => {
 };
 
 const loginUser = (user) => {
-
   const fetchPromise = 
   fetch(serverAddress + "/auth/login", {
     method: "POST",
