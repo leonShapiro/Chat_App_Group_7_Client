@@ -56,12 +56,12 @@ console.log(jsonObject);
 
   });
 
-  
-  function downloadCSV(csvStr) {
+
+function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
     hiddenElement.href = "data:text/csv;" + encodeURI(csvStr);
     hiddenElement.download = "Exported chat.csv";
     hiddenElement.click();
   }
-});
+})
 openConnection();

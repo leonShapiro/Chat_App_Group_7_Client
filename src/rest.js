@@ -42,6 +42,8 @@ const createMessage = (message) => {
 };
 
 const loginUser = (user) => {
+
+  const fetchPromise = 
   fetch(serverAddress + "/auth/login", {
     method: "POST",
     body: JSON.stringify({
@@ -54,3 +56,15 @@ const loginUser = (user) => {
   });
 };
 export { createUser, createMessage, loginUser,createGuest };
+  })
+
+  fetchPromise.then((Response) => {
+    if(Response.ok){
+      Response.text().then((text) => {
+        sessionStorage.setItem("token",text)
+      })
+    }
+  })
+} 
+export{createUser,createMessage,loginUser}
+
