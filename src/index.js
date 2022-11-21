@@ -43,14 +43,12 @@ $(() => {
   downloadCSV(jsonObject);
 
   });
-
-
-  function downloadCSV(csvStr) {
+function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
     hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
     hiddenElement.target = "_blank";
     hiddenElement.download = "Exported chat.csv";
     hiddenElement.click();
   }
-});
+})
 openConnection();
