@@ -35,6 +35,8 @@ const createGuest = (user) => {
         sessionStorage.setItem("token",myArray[1])
         window.location.replace("./pages/chat.html");
       })
+    }else{
+      window.alert("The nickname is already taken, please choose a different one")
     }
   })
 };
@@ -73,6 +75,12 @@ const loginUser = (user) => {
         sessionStorage.setItem("nickName",myArray[0])
         sessionStorage.setItem("token",myArray[1])
         window.location.replace("./pages/chat.html");
+      })
+    }else{
+      Response.text().then((text) => {
+        const errorArray = text.split(",")
+        const errorMessage = errorArray[3].split("\"")
+        window.alert(errorMessage[3])
       })
     }
   })
