@@ -1,15 +1,16 @@
 import $ from "jquery";
 import { createUser, loginUser, createMessage, createGuest,getAllUsers,displayUsers} from "./rest";
 import { openConnection, sendPlainMessage,getAllMesseges, } from "./sockets";
-
+import { openConnection, sendPlainMessage,getAllMesseges } from "./sockets";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 $(() => {
+
   $("#reg-btn").on("click", () => {
     const user = {
       email: $("#emailInput").val(),
-      nickName: $("#nicknameInput").val(),
+      nickName: $("#userInput").val(),
       password: $("#passwordInput").val(),
     };
     createUser(user);
@@ -23,13 +24,11 @@ $(() => {
   });
 
   $("#send-btn").on("click", () => {
-    const Message = {
-      //id: $('#emailInput').val(),
-      //sender: $('#userInput').val(),
-      content: $("#message-input").val(),
-    };
-    createMessage(Message);
-    sendPlainMessage("MyUser", $("#message-input").val());
+    const message = $("#message-input").val()
+    const token = sessionStorage.getItem("token")
+  
+    createMessage(token,message);
+    sendPlainMessage(sessionStorage.getItem("nickName"), $("#message-input").val());
     document.getElementById("message-input").value = "";
   });
 
@@ -39,7 +38,6 @@ $(() => {
       password: $("#passwordInput").val(),
     };
     loginUser(user);
-    window.location.replace("./pages/chat.html");
   });
 
   $("#export-btn").on("click", () => {
@@ -47,23 +45,21 @@ $(() => {
   var jsonObj = messages.map(o => Object.values(o).join(' : '));
   var jsonObject = JSON.stringify(jsonObj,null,"\t");
   downloadCSV(jsonObject);
-
   });
 
 
 document.getElementById("btn-list").addEventListener("click", displayUsers);
 
+  });
 
-  function downloadCSV(csvStr) {
+function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
-    hiddenElement.href = "data:text/csv;" + encodeURI(csvStr);
+    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
+    hiddenElement.target = "_blank";
     hiddenElement.download = "Exported chat.csv";
     hiddenElement.click();
   }
-
 });
-
-
 
 
 

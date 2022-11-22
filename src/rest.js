@@ -1,11 +1,6 @@
 import {get} from "jquery";
 import { serverAddress } from "./constants";
 
-
-
-
-
-
    const displayUsers = async () => {
       let users=[];
       users= await getAllUsers();
@@ -24,9 +19,8 @@ for(let i = 0; i < users.length; i++) {
     };
 
 
-
 const createUser = (user) => {
-  fetch(serverAddress +"/user", {
+  fetch(serverAddress + "/user", {
     method: "POST",
     body: JSON.stringify({
       nickName: user.nickName,
@@ -38,7 +32,6 @@ const createUser = (user) => {
     },
   });
 };
-
 
 const createGuest = (user) => {
   fetch(serverAddress + "/user/guest", {
@@ -52,12 +45,13 @@ const createGuest = (user) => {
   });
 };
 
-
-
-const createMessage = (message) => {
-  fetch(serverAddress + "/message", {
+const createMessage = (token,message) => {
+  fetch(serverAddress + "/message/create", {
     method: "POST",
-    body: JSON.stringify({ content: message.content }),
+    body: JSON.stringify({ 
+    token: token,
+    content :message
+   }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -84,6 +78,7 @@ let result;
 
 
 const loginUser = (user) => {
+  const loginFetchPromise = 
   fetch(serverAddress + "/auth/login", {
     method: "POST",
     body: JSON.stringify({
@@ -94,11 +89,23 @@ const loginUser = (user) => {
       "Content-Type": "application/json",
     },
   });
-
-
-
-
-
 }
 
+ loginFetchPromise.then((Response) => {
+    if(Response.ok){
+      Response.text().then((text) => {
+
+        const myArray = text.split(":");
+        sessionStorage.setItem("nickName",myArray[0])
+        sessionStorage.setItem("token",myArray[1])
+        window.location.replace("./pages/chat.html");
+      })
+    }
+  })
+
+
 export { createUser, createMessage, loginUser,createGuest, getAllUsers,displayUsers};
+
+ 
+
+
