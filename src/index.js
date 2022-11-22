@@ -54,5 +54,4 @@ function downloadCSV(csvStr) {
     hiddenElement.click();
   }
 })
-
 openConnection();

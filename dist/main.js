@@ -1313,7 +1313,6 @@ eval("\n\nvar utils = __webpack_require__(/*! ../utils/event */ \"./node_modules
 "use strict";
 eval("\n\nvar inherits = __webpack_require__(/*! inherits */ \"./node_modules/inherits/inherits_browser.js\")\n  , AjaxBasedTransport = __webpack_require__(/*! ./lib/ajax-based */ \"./node_modules/sockjs-client/lib/transport/lib/ajax-based.js\")\n  , XdrStreamingTransport = __webpack_require__(/*! ./xdr-streaming */ \"./node_modules/sockjs-client/lib/transport/xdr-streaming.js\")\n  , XhrReceiver = __webpack_require__(/*! ./receiver/xhr */ \"./node_modules/sockjs-client/lib/transport/receiver/xhr.js\")\n  , XDRObject = __webpack_require__(/*! ./sender/xdr */ \"./node_modules/sockjs-client/lib/transport/sender/xdr.js\")\n  ;\n\nfunction XdrPollingTransport(transUrl) {\n  if (!XDRObject.enabled) {\n    throw new Error('Transport created when disabled');\n  }\n  AjaxBasedTransport.call(this, transUrl, '/xhr', XhrReceiver, XDRObject);\n}\n\ninherits(XdrPollingTransport, AjaxBasedTransport);\n\nXdrPollingTransport.enabled = XdrStreamingTransport.enabled;\nXdrPollingTransport.transportName = 'xdr-polling';\nXdrPollingTransport.roundTrips = 2; // preflight, ajax\n\nmodule.exports = XdrPollingTransport;\n\n\n//# sourceURL=webpack://webpack/./node_modules/sockjs-client/lib/transport/xdr-polling.js?");
 
-
 /***/ }),
 
 /***/ "./node_modules/sockjs-client/lib/transport/xdr-streaming.js":
