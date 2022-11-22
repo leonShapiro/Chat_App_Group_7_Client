@@ -1,6 +1,6 @@
 import $ from "jquery";
-import { createUser, loginUser, createMessage, createGuest } from "./rest";
-import { openConnection, sendPlainMessage,getAllMesseges } from "./sockets";
+import { createUser, loginUser, createMessage, createGuest,getAllUsers,displayUsers} from "./rest";
+import { openConnection, sendPlainMessage,getAllMesseges, } from "./sockets";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -50,12 +50,23 @@ $(() => {
 
   });
 
-  
+
+document.getElementById("btn-list").addEventListener("click", displayUsers);
+
+
   function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
     hiddenElement.href = "data:text/csv;" + encodeURI(csvStr);
     hiddenElement.download = "Exported chat.csv";
     hiddenElement.click();
   }
+
 });
+
+
+
+
+
+
+
 openConnection();

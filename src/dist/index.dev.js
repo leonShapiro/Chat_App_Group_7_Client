@@ -53,6 +53,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
     var jsonObject = JSON.stringify(jsonObj, null, "\t");
     downloadCSV(jsonObject);
   });
+  document.getElementById("btn-list").addEventListener("click", _rest.displayUsers);
 
   function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
