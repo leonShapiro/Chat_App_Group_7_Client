@@ -42,5 +42,4 @@ const getAllMesseges =() =>{
   return messages;
 }
 
-
 export { openConnection, sendPlainMessage ,getAllMesseges};
