@@ -18,7 +18,7 @@ const onMessageReceived = (payload) => {
 
 const onConnected = () => {
   stompClient.subscribe("/topic/mainChat", onMessageReceived);
-  stompClient.send("/app/hello", [], JSON.stringify({ name: "Default user" }));
+  stompClient.send("/app/hello", [], JSON.stringify({ name: sessionStorage.getItem("nickName") }));
 };
 
 const openConnection = () => {
@@ -41,6 +41,5 @@ const sendPlainMessage = (user, message) => {
 const getAllMesseges =() =>{
   return messages;
 }
-
 
 export { openConnection, sendPlainMessage ,getAllMesseges};

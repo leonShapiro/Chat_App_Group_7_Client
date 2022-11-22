@@ -27,7 +27,7 @@ $(() => {
     const token = sessionStorage.getItem("token")
   
     createMessage(token,message);
-    sendPlainMessage("MyUser", $("#message-input").val());
+    sendPlainMessage(sessionStorage.getItem("nickName"), $("#message-input").val());
     document.getElementById("message-input").value = "";
   });
 
