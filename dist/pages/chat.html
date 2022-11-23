@@ -5,19 +5,26 @@
   <meta charset="utf-8" />
   <title>Getting Started</title>
 </head>
-
-<body>
     <link rel="stylesheet" href="../chat.css" />
-
   <div class="container">
     <br>
     <div class="row">
       <div class="col-3">
-        <script src="../main.js"></script>  
+       <table id="users-list">
+          <div id="userl">
+            <thead>
+                <tr>
+                <th scope="col">Users List</th>
+                </tr>
+            </thead>
+            <tbody id="user-list"></tbody>
+</div>
+        </table>
+      
+
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<button id="export-btn" style='font-size:16px'> <i class='fas fa-file-export' style='font-size:12px'> Export</i>
-</i></button>
+  <script type="module" src = "../chat.js"></script>
 
       </div>
       <div class="col-9">
@@ -25,11 +32,15 @@
         <div class="input-group mb-3">
           <input type="text" id="message-input" class="form-control" placeholder="Type your message here..." aria-describedby="send-btn">
           <button class="btn btn-outline-secondary" type="button" id="send-btn">Send</button>
+           <button id="export-btn" style='font-size:16px'> <i class='fas fa-file-export' style='font-size:12px'> Export</i>
         </div>
+           <button class="btn btn-outline-secondary" type="button" id="logOut-btn">Log Out</button>
+
       </div>
     </div>
+</i></button>
   </div>
-  <script src = "../chat.js"></script>
+  <script src="../main.js"></script>  
 </body>
 
 </html>
