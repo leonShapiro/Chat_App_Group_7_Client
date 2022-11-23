@@ -38,8 +38,6 @@ const sendPlainMessage = (user, message) => {
   );
 };
 
-const getAllMesseges =() =>{
-  return messages;
-}
 
-export { openConnection, sendPlainMessage ,getAllMesseges};
+
+export { openConnection, sendPlainMessage };

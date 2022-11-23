@@ -2,6 +2,7 @@
 const serverAddress = "http://localhost:8080";
 import {User} from "./Entities/user.js";
 
+
     displayUsers();
     async function displayUsers(){
     try {
@@ -10,7 +11,6 @@ import {User} from "./Entities/user.js";
     for (var key in users) {
         addUserToList(users[key]);
     }
-    
     } catch(e) {
     console.log(e);
     }

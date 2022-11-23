@@ -15,7 +15,8 @@ const createUser = (user) => {
 };
 
 const createGuest = (user) => {
-  fetch(serverAddress + "/user/guest", {
+  const joinAsGuestPromise = 
+  fetch(serverAddress + "/auth/guest", {
     method: "POST",
     body: JSON.stringify({
       nickName: user.nickName,
@@ -24,6 +25,20 @@ const createGuest = (user) => {
       "Content-Type": "application/json",
     },
   });
+
+  joinAsGuestPromise.then((Response) => {
+    if(Response.ok){
+      Response.text().then((text) => {
+
+        const myArray = text.split(":");
+        sessionStorage.setItem("nickName",myArray[0])
+        sessionStorage.setItem("token",myArray[1])
+        window.location.replace("./pages/chat.html");
+      })
+    }else{
+      window.alert("The nickname is already taken, please choose a different one")
+    }
+  })
 };
 
 const createMessage = (token,message) => {
@@ -61,6 +76,12 @@ const loginUser = (user) => {
         sessionStorage.setItem("token",myArray[1])
         window.location.replace("./pages/chat.html");
       })
+    }else{
+      Response.text().then((text) => {
+        const errorArray = text.split(",")
+        const errorMessage = errorArray[3].split("\"")
+        window.alert(errorMessage[3])
+      })
     }
   })
 } 
@@ -79,4 +100,20 @@ let result;
       return  users;
     })
 }
-export{createUser,createMessage,loginUser,createGuest}
+
+
+async function getAllMesseges() {
+let result;
+   return await fetch(serverAddress +'/message/getAll', {
+      method: 'GET'
+    })
+    .then( function(response) {
+      return  response.json();
+    })
+    .then( function(data) {
+      return data;
+    })
+}
+
+
+export{createUser,createMessage,loginUser,createGuest,getAllMesseges}
