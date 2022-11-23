@@ -100,4 +100,20 @@ let result;
       return  users;
     })
 }
-export{createUser,createMessage,loginUser,createGuest}
+
+
+async function getAllMesseges() {
+let result;
+   return await fetch(serverAddress +'/message/getAll', {
+      method: 'GET'
+    })
+    .then( function(response) {
+      return  response.json();
+    })
+    .then( function(data) {
+      return data;
+    })
+}
+
+
+export{createUser,createMessage,loginUser,createGuest,getAllMesseges}

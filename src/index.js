@@ -1,6 +1,6 @@
 import $ from "jquery";
-import { createUser, loginUser, createMessage, createGuest } from "./rest";
-import { openConnection, sendPlainMessage,getAllMesseges } from "./sockets";
+import { createUser, loginUser, createMessage, createGuest,getAllMesseges} from "./rest";
+import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -39,12 +39,16 @@ $(() => {
     loginUser(user);
   });
 
-  $("#export-btn").on("click", () => {
-    const messages = getAllMesseges();
-  var jsonObj = messages.map(o => Object.values(o).join(' : '));
-  var jsonObject = JSON.stringify(jsonObj,null,"\t");
+  $("#export-btn").on("click",async () => {
+  const messages = await getAllMesseges();
+ var jsonObj = messages.map(o => Object.values(o).join(' : '));
+  var jsonObject = JSON.stringify(jsonObj,"dontHave","\t");
   downloadCSV(jsonObject);
   });
+
+
+
+
 
 function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
@@ -54,4 +58,18 @@ function downloadCSV(csvStr) {
     hiddenElement.click();
   }
 })
+
+
+   async function exportChat(){
+    try {
+
+    const messages = await getAllMesseges();
+        console.log(messages);
+    }
+  catch(e) {
+    console.log(e);
+  }
+   }
 openConnection();
+
+export{exportChat};
