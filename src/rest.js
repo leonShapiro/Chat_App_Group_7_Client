@@ -1,28 +1,14 @@
 import { serverAddress } from "./constants";
 
-const createUser = (user) => {
-  fetch(serverAddress + "/user", {
+const createMessage = (message) => {
+  fetch(serverAddress + "/message", {
     method: "POST",
-    body: JSON.stringify({
-      nickName: user.nickName,
-      email: user.email,
-      password: user.password,
-    }),
+    body: JSON.stringify({ content: message.content }),
     headers: {
       "Content-Type": "application/json",
     },
   });
-} 
-
-const createMessage = (message) => {
-  fetch(serverAddress + "/message", {
-    method: 'POST',
-    body: JSON.stringify({ content : message.content }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-}
+};
 
 const loginUser = (user) => {
   fetch(serverAddress + "/auth/login", {
@@ -35,6 +21,56 @@ const loginUser = (user) => {
       "Content-Type": "application/json",
     },
   });
-} 
+};
 
-export{createUser,createMessage,loginUser}
+///////////REGISER SECTION //////////////////////////////////////////////////////////////
+const createUser = (user) => {
+  sessionStorage.setItem("registerEmail", user.email);
+  const registerFetchResponse = fetch(serverAddress + "/auth/addUser", {
+    method: "POST",
+    body: JSON.stringify({
+      nickName: user.nickName,
+      email: user.email,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      dateOfBirth: user.dateOfBirth,
+      description: user.description,
+      url: "http://localhost:9000/pages/confirmation.html?id=",
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  registerFetchResponse.then((Response) => {
+    if (Response.ok) {
+      Response.text().then((text) => {
+        console.log(text);
+        window.location.replace(
+          "http://localhost:9000/pages/sentEmailPage.html"
+        );
+      });
+    }
+  });
+};
+
+const confirmUserAccount = (id) => {
+  const esponse = fetch(serverAddress + "/auth/validateUser", {
+    method: "POST",
+    body: JSON.stringify(id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  esponse.then((Response) => {
+    if (Response.ok) {
+      Response.text().then((text) => {
+        window.location.replace("http://localhost:9000/");
+      });
+    }
+  });
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////
+export { createUser, createMessage, loginUser, confirmUserAccount };

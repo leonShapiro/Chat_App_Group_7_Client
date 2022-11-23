@@ -18,42 +18,91 @@
       integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="../registration.css" />
+    <link rel="stylesheet" href="confirmation.css" />
     <title>Register</title>
   </head>
-  <body>
+  <body class="sentEmailPageBody">
 
+    <div class = "page-container formContainer">
     <main class="row flex-row-reverse m-auto shadow bg-white px-0 rounded-3">
-      <h1 class="align-items-center ">Registration</h1>
  <div class="col">
-   <div class="container">
-    <br>
+  <div class="container">
     <div class="row">
-      <div class="col-3">
-        <script src="../main.js"></script>
-        <form id="signup">
+      <div>     
+        <form id="signup" class="registerform">
+          <div class="h3cenetr"><h3 class="align-items-center ">Registration</h3></div>
+          <br>
+          <h6>Please fill the following information:</h6>
           <div class="mb-3">
-            <label for="emailInput" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="emailInput">
+            <label for="emailInput" class="form-label"
+            >Email address</label>
+            <input type="email" class="form-control" id="emailInput" required maxlength="32" pattern=".+@.+\\.[a-z]+"
+            title="Eight or more characters">
+            <span id='messageemailInput'></span>
           </div>
+
           <div class="mb-3">
-            <label for="userInput" class="form-label">Name</label>
-            <input type="text" class="form-control" id="userInput">
+            <label class="control-label" for="nicknameInput"> Nickname </label>
+            <input
+              id="nicknameInput"
+              class="form-control"
+              required
+              maxlength="32" pattern="^([A-Za-z][A-Za-z0-9_]).{4,32}$"
+            />
+            <span id='messagenickname'></span>
           </div>
           <div class="mb-3">
             <label for="passwordInput" class="form-label">Password</label>
-            <input type="password" class="form-control" id="passwordInput">
+            <input type="password" class="form-control" id="passwordInput" maxlength="20" pattern="^(?=.*[0-9])(?=.*[A-Za-z]).{8,20}$">
+          </div>
+          <div class="mb-3">
+            <label for="passwordInputConfirm" class="form-label">Confirm password</label>
+            <input type="password" class="form-control" id="passwordInputConfirm" maxlength="20" pattern="^(?=.*[0-9])(?=.*[A-Za-z]).{8,20}$">
+            <span id='messagepassword'></span>
+          </div>
+          <hr class="myHR">
+          <h6>Complete yor profile with optional information:</h6>
+
+          <div class="mb-3">
+            <label for="userInput" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="userFirstNameInput" maxlength="32" pattern="[A-Za-z]{1,32}">
+            <span id='messagefirstname'></span>
           </div>
 
+          <div class="mb-3">
+            <label for="userInput" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="userLastNameInput" maxlength="32" pattern="[A-Za-z]{1,32}">
+            <span id='messagelastname'></span>
+          </div>
       <div class="mb-3">
             <label for="birthdayInput" class="form-label">Birthday</label>
             <input type="date" class="form-control" id="birthdayInput">
           </div>
-          <button class="btn btn-outline-secondary" type="button" id="reg-btn">Register</button>
+
+          <div class="form-group">
+            <label class="control-label" for="descriptionInput"
+              >Description
+            </label>
+            <textarea
+              id="descriptionInput"
+              maxlength="500"
+              rows="4"
+              cols="50"
+              class="form-control"
+            ></textarea>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="profileImageInput">Upload profile picture </label>
+            <input type="file" class="form-control-file" id="profileImageInput">
+          </div>
+          <br>
+          <div class="cenetr"><button class="btn btn-info" type="button" id="reg-btn">Register</button></div>
         </form>
-  </div>
 </div>
-      <script> 
+</main>
+</div>
+<script> 
 </script>
     <!-- Bootstrap JS CDN -->
     <script
@@ -61,8 +110,8 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-</form>
 </script>
-</main>
+<script src="../index.js"></script>
+<script src="../main.js"></script>
   </body>
 </html>
