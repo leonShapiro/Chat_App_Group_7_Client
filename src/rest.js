@@ -24,6 +24,7 @@ const loginUser = (user) => {
 };
 
 ///////////REGISER SECTION //////////////////////////////////////////////////////////////
+const urlstr = "http://localhost:9000/pages/confirmation.html?id=";
 const createUser = (user) => {
   sessionStorage.setItem("registerEmail", user.email);
   const registerFetchResponse = fetch(serverAddress + "/auth/addUser", {
@@ -36,7 +37,7 @@ const createUser = (user) => {
       lastName: user.lastName,
       dateOfBirth: user.dateOfBirth,
       description: user.description,
-      url: "http://localhost:9000/pages/confirmation.html?id=",
+      url: urlstr,
     }),
     headers: {
       "Content-Type": "application/json",
