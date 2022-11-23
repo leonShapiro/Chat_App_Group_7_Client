@@ -64,4 +64,19 @@ const loginUser = (user) => {
     }
   })
 } 
+
+
+async function getAllUsers() {
+let result;
+   return await fetch(serverAddress +'/user/getAll', {
+      method: 'GET'
+    })
+    .then( function(response) {
+      return  response.json();
+    })
+    .then( function(data) {
+      var users = JSON.stringify(data,null,"\t");
+      return  users;
+    })
+}
 export{createUser,createMessage,loginUser,createGuest}
