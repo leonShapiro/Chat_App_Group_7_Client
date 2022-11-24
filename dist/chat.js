@@ -1,9 +1,7 @@
-
-const serverAddress = "http://localhost:8080";
-import {User} from "./Entities/user.js";
-
+import { getAllUsers } from "./rest";
 
     displayUsers();
+
     async function displayUsers(){
     try {
 
@@ -16,7 +14,6 @@ import {User} from "./Entities/user.js";
     }
     }
 
-
   function addUserToList(user) {
         const list = document.querySelector('#user-list');
         const row = document.createElement('tr');
@@ -28,15 +25,5 @@ import {User} from "./Entities/user.js";
     }
 
 
-async function getAllUsers() {
-let result;
-   return await fetch(serverAddress +'/register/getAll', {
-      method: 'GET'
-    })
-    .then( function(response) {
-      return  response.json();
-    })
-    .then( function(data) {
-      return  data;
-    })
-}
+
+
