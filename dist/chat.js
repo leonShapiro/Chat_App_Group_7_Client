@@ -1,29 +1,24 @@
-import { getAllUsers } from "./rest";
+import { getAllUsers } from "../src/rest";
 
-    displayUsers();
+displayUsers();
 
-    async function displayUsers(){
-    try {
-
-    const users= await getAllUsers();
+async function displayUsers() {
+  try {
+    const users = await getAllUsers();
     for (var key in users) {
-        addUserToList(users[key]);
+      addUserToList(users[key]);
     }
-    } catch(e) {
+  } catch (e) {
     console.log(e);
-    }
-    }
+  }
+}
 
-  function addUserToList(user) {
-        const list = document.querySelector('#user-list');
-        const row = document.createElement('tr');
-        row.innerHTML = `
+function addUserToList(user) {
+  const list = document.querySelector("#user-list");
+  const row = document.createElement("tr");
+  row.innerHTML = `
             <td><a href=”“>${user.nickName}</a></td>
             <td><i class="bi bi-person"></i></td>
         `;
-        list.appendChild(row);
-    }
-
-
-
-
+  list.appendChild(row);
+}

@@ -61,6 +61,13 @@ $(() => {
     createUser(user);
   });
 
+  $("#reg-geust-btn").on("click", () => {
+    const user = {
+      nickName: $("#nicknameInput").val(),
+    };
+    createGuest(user);
+  });
+
   $("#confirm-btn").on("click", () => {
     const queryString = window.location.search;
     var id = queryString.substring(queryString.lastIndexOf("=") + 1);
