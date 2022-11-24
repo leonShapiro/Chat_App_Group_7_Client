@@ -148,6 +148,8 @@ const confirmUserAccount = (id) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 export {
+  getAllUsers,
+  createUser,
   createMessage,
   loginUser,
   createGuest,

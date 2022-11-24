@@ -1,26 +1,35 @@
 import $ from "jquery";
-import { createUser, loginUser, createMessage, createGuest,getAllMesseges, confirmUserAccount} from "./rest";
+import {
+  createUser,
+  loginUser,
+  createMessage,
+  createGuest,
+  getAllMesseges,
+  confirmUserAccount,
+} from "./rest";
 import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+$("#send-btn").on("click", () => {
+  const message = $("#message-input").val();
+  const token = sessionStorage.getItem("token");
 
-  $("#send-btn").on("click", () => {
-    const message = $("#message-input").val()
-    const token = sessionStorage.getItem("token")
-  
-    createMessage(token,message);
-    sendPlainMessage(sessionStorage.getItem("nickName"), $("#message-input").val());
-    document.getElementById("message-input").value = "";
-  });
+  createMessage(token, message);
+  sendPlainMessage(
+    sessionStorage.getItem("nickName"),
+    $("#message-input").val()
+  );
+  document.getElementById("message-input").value = "";
+});
 
-  $("#login-btn").on("click", () => {
-    const user = {
-      email: $("#emailInput").val(),
-      password: $("#passwordInput").val(),
-    };
-    loginUser(user);
-  });
+$("#login-btn").on("click", () => {
+  const user = {
+    email: $("#emailInput").val(),
+    password: $("#passwordInput").val(),
+  };
+  loginUser(user);
+});
 
 ///////////REGISER SECTION //////////////////////////////////////////////////////////////
 //---------------------------------------------------------------- REGISTER
@@ -64,31 +73,28 @@ $(() => {
   });
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  $("#export-btn").on("click",async () => {
-  const messages = await getAllMesseges();
- var jsonObj = messages.map(o => Object.values(o).join(' : '));
-  var jsonObject = JSON.stringify(jsonObj,"dontHave","\t");
-  downloadCSV(jsonObject);
+  $("#export-btn").on("click", async () => {
+    const messages = await getAllMesseges();
+    var jsonObj = messages.map((o) => Object.values(o).join(" : "));
+    var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
+    downloadCSV(jsonObject);
   });
 
-
-function downloadCSV(csvStr) {
+  function downloadCSV(csvStr) {
     var hiddenElement = document.createElement("a");
     hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
     hiddenElement.target = "_blank";
     hiddenElement.download = "Exported chat.csv";
     hiddenElement.click();
   }
-})
-   async function exportChat(){
-    try {
-
+});
+async function exportChat() {
+  try {
     const messages = await getAllMesseges();
-        console.log(messages);
-    }
-  catch(e) {
+    console.log(messages);
+  } catch (e) {
     console.log(e);
   }
-   }
+}
 openConnection();
-export{exportChat};
+export { exportChat };

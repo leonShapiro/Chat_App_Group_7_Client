@@ -23,33 +23,46 @@
     <title>Home</title>
   </head>
   <body>
-    <main class="row m-auto shadow bg-white px-0 rounded-3 h-40 ">
+    <main class="row m-auto shadow bg-white px-0 rounded-3 h-40">
       <div class="col">
-          <form id="signIn" action="./pages/chat.html">
+        <form id="signIn" action="./pages/chat.html">
           <div class="mb-3">
             <label for="emailInput" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="emailInput">
+            <input type="email" class="form-control" id="emailInput" />
           </div>
           <div class="mb-3">
             <label for="passwordInput" class="form-label">Password</label>
-            <input type="password" class="form-control" id="passwordInput">
+            <input type="password" class="form-control" id="passwordInput" />
           </div>
-          <button id="login-btn" type="button" class="btn btn-primary">Login</button>
+          <button id="login-btn" type="button" class="btn btn-primary">
+            Login
+          </button>
         </form>
-          <form action="./pages/registration.html">
+        <form action="./pages/registration.html">
           <h3 class="d-flex p-5 mb-0 fa-1x">Don't have an account yet?</h3>
-        <button type="submit" class="btn btn-dark shadow w-25 rounded-pill d-flex"> Register</button>
-          <i class=" fa-5x text-white h-200"></i>
+          <button
+            type="submit"
+            class="btn btn-dark shadow w-25 rounded-pill d-flex"
+          >
+            Register
+          </button>
+          <i class="fa-5x text-white h-200"></i>
         </form>
       </div>
       <div class="col bg-dark">
-      <h1><img src="../anonymos.png" width="200" height="200"></h1>
+        <h1><img src="../anonymos.png" width="200" height="200" /></h1>
         <form id="geust-reg">
           <div class="mb-3">
             <label for="nicknameInput" class="form-label">Nick name</label>
-            <input type="text" class="form-control" id="nicknameInput">
+            <input type="text" class="form-control" id="nicknameInput" />
           </div>
-          <button class="btn btn-outline-secondary" type="button" id="reg-geust-btn">Log in as a user</button>
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="reg-geust-btn"
+          >
+            Log in as a user
+          </button>
         </form>
       </div>
     </main>
@@ -63,7 +76,7 @@
       const buttons = document.querySelectorAll("button");
       //   console.log(typeof buttons);
       (function () {
-         console.log("function");
+        console.log("function");
         Object.keys(buttons).map((key, button) =>
           onMouseOverAndOut(buttons[key])
         );
