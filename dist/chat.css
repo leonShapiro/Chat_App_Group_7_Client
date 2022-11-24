@@ -49,3 +49,23 @@ a:link, a:visited {
   text-decoration: none;
   display: inline-block;
 }
+
+
+.hidden {display:none;}
+.customMenu { font-weight:bold; color:#f00; }
+#contextMenu {
+   position:absolute;
+    width:1000px;
+    left: 50%;
+    margin-left:-500px;
+  position:fixed;
+  border:2px double #333; 
+  width:150px; 
+  height:130px;
+  top:50%;
+  left:30%;
+  background-color:white;
+
+}
+
+

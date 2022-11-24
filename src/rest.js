@@ -79,8 +79,8 @@ async function getAllUsers() {
       return response.json();
     })
     .then(function (data) {
-      var users = JSON.stringify(data, null, "\t");
-      return users;
+    console.log(data);
+      return data;
     });
 }
 
