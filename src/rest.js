@@ -1,16 +1,34 @@
 import { serverAddress } from "./constants";
 
+const urlstr = "http://localhost:9000/pages/confirmation.html?id=";
+
 const createUser = (user) => {
-  fetch(serverAddress + "/user", {
+  sessionStorage.setItem("registerEmail", user.email);
+  const registerFetchResponse = fetch(serverAddress + "/auth/addUser", {
     method: "POST",
     body: JSON.stringify({
       nickName: user.nickName,
       email: user.email,
       password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      dateOfBirth: user.dateOfBirth,
+      description: user.description,
+      url: urlstr,
     }),
     headers: {
       "Content-Type": "application/json",
     },
+  });
+  registerFetchResponse.then((Response) => {
+    if (Response.ok) {
+      Response.text().then((text) => {
+        console.log(text);
+        window.location.replace(
+          "http://localhost:9000/pages/sentEmailPage.html"
+        );
+      });
+    }
   });
 };
 

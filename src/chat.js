@@ -1,8 +1,7 @@
+import $ from "jquery";
 import { getAllUsers } from "../src/rest";
 
 $(() => {
-  window.alert("dasdasd")
-
   if(sessionStorage.getItem("token") == null){
     window.location.replace("http://localhost:9000/");
   }
@@ -29,7 +28,5 @@ $(() => {
           `;
     list.appendChild(row);
   }
-  
-
 })
 
