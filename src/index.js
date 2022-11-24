@@ -36,13 +36,11 @@ $(() => {
     if ($("#passwordInput").val() != $("#passwordInputConfirm").val()) {
       $("#messagepassword").html("Password don't match").css("color", "red");
     }
-
     var user = {
       email: $("#emailInput").val(),
       nickName: $("#nicknameInput").val(),
       password: $("#passwordInput").val(),
     };
-
     if ($("#userFirstNameInput").val().length > 0) {
       user.firstName = $("#userFirstNameInput").val();
     }
@@ -73,22 +71,22 @@ $(() => {
     var id = queryString.substring(queryString.lastIndexOf("=") + 1);
     confirmUserAccount(id);
   });
-
-  $("#export-btn").on("click", async () => {
-    const messages = await getAllMesseges();
-    var jsonObj = messages.map((o) => Object.values(o).join(" : "));
-    var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
-    downloadCSV(jsonObject);
-  });
-
-  function downloadCSV(csvStr) {
-    var hiddenElement = document.createElement("a");
-    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
-    hiddenElement.target = "_blank";
-    hiddenElement.download = "Exported chat.csv";
-    hiddenElement.click();
-  }
 });
+
+$("#export-btn").on("click", async () => {
+  const messages = await getAllMesseges();
+  var jsonObj = messages.map((o) => Object.values(o).join(" : "));
+  var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
+  downloadCSV(jsonObject);
+});
+
+function downloadCSV(csvStr) {
+  var hiddenElement = document.createElement("a");
+  hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
+  hiddenElement.target = "_blank";
+  hiddenElement.download = "Exported chat.csv";
+  hiddenElement.click();
+}
 
 async function exportChat() {
   try {
