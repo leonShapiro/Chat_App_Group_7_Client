@@ -9,6 +9,8 @@ import {
 } from "./rest";
 import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
+import { displayUsers } from "./chat";
+import "./chat";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 $(() => {

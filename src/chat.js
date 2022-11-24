@@ -1,13 +1,13 @@
 import $ from "jquery";
 import { getAllUsers } from "../src/rest";
-
+alert("fdsgsf");
 $(() => {
-  if(sessionStorage.getItem("token") == null){
+  if (sessionStorage.getItem("token") == null) {
     window.location.replace("http://localhost:9000/");
   }
-  
+
   displayUsers();
-  
+
   async function displayUsers() {
     try {
       const users = await getAllUsers();
@@ -18,7 +18,7 @@ $(() => {
       console.log(e);
     }
   }
-  
+
   function addUserToList(user) {
     const list = document.querySelector("#user-list");
     const row = document.createElement("tr");
@@ -28,5 +28,4 @@ $(() => {
           `;
     list.appendChild(row);
   }
-})
-
+});
