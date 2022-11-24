@@ -1,42 +1,35 @@
+import { getAllUsers } from "../src/rest";
 
-const serverAddress = "http://localhost:8080";
-import {User} from "./Entities/user.js";
+$(() => {
+  window.alert("dasdasd")
 
-
-    displayUsers();
-    async function displayUsers(){
+  if(sessionStorage.getItem("token") == null){
+    window.location.replace("http://localhost:9000/");
+  }
+  
+  displayUsers();
+  
+  async function displayUsers() {
     try {
-
-    const users= await getAllUsers();
-    for (var key in users) {
+      const users = await getAllUsers();
+      for (var key in users) {
         addUserToList(users[key]);
+      }
+    } catch (e) {
+      console.log(e);
     }
-    } catch(e) {
-    console.log(e);
-    }
-    }
-
-
+  }
+  
   function addUserToList(user) {
-        const list = document.querySelector('#user-list');
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td><a href=”“>${user.nickName}</a></td>
-            <td><i class="bi bi-person"></i></td>
-        `;
-        list.appendChild(row);
-    }
+    const list = document.querySelector("#user-list");
+    const row = document.createElement("tr");
+    row.innerHTML = `
+              <td><a href=”“>${user.nickName}</a></td>
+              <td><i class="bi bi-person"></i></td>
+          `;
+    list.appendChild(row);
+  }
+  
 
+})
 
-async function getAllUsers() {
-let result;
-   return await fetch(serverAddress +'/register/getAll', {
-      method: 'GET'
-    })
-    .then( function(response) {
-      return  response.json();
-    })
-    .then( function(data) {
-      return  data;
-    })
-}

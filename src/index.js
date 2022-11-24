@@ -11,29 +11,27 @@ import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-$("#send-btn").on("click", () => {
-  const message = $("#message-input").val();
-  const token = sessionStorage.getItem("token");
-
-  createMessage(token, message);
-  sendPlainMessage(
-    sessionStorage.getItem("nickName"),
-    $("#message-input").val()
-  );
-  document.getElementById("message-input").value = "";
-});
-
-$("#login-btn").on("click", () => {
-  const user = {
-    email: $("#emailInput").val(),
-    password: $("#passwordInput").val(),
-  };
-  loginUser(user);
-});
-
-///////////REGISER SECTION //////////////////////////////////////////////////////////////
-//---------------------------------------------------------------- REGISTER
 $(() => {
+  $("#send-btn").on("click", () => {
+    const message = $("#message-input").val();
+    const token = sessionStorage.getItem("token");
+
+    createMessage(token, message);
+    sendPlainMessage(
+      sessionStorage.getItem("nickName"),
+      $("#message-input").val()
+    );
+    document.getElementById("message-input").value = "";
+  });
+
+  $("#login-btn").on("click", () => {
+    const user = {
+      email: $("#emailInput").val(),
+      password: $("#passwordInput").val(),
+    };
+    loginUser(user);
+  });
+
   $("#reg-btn").on("click", () => {
     if ($("#passwordInput").val() != $("#passwordInputConfirm").val()) {
       $("#messagepassword").html("Password don't match").css("color", "red");
@@ -63,15 +61,18 @@ $(() => {
     createUser(user);
   });
 
-  //--------------------------------------------------------------- CONFIRM
-  $(() => {
-    $("#confirm-btn").on("click", () => {
-      const queryString = window.location.search;
-      var id = queryString.substring(queryString.lastIndexOf("=") + 1);
-      confirmUserAccount(id);
-    });
+  $("#reg-geust-btn").on("click", () => {
+    const user = {
+      nickName: $("#nicknameInput").val(),
+    };
+    createGuest(user);
   });
-  /////////////////////////////////////////////////////////////////////////////////////////
+
+  $("#confirm-btn").on("click", () => {
+    const queryString = window.location.search;
+    var id = queryString.substring(queryString.lastIndexOf("=") + 1);
+    confirmUserAccount(id);
+  });
 
   $("#export-btn").on("click", async () => {
     const messages = await getAllMesseges();
@@ -88,6 +89,7 @@ $(() => {
     hiddenElement.click();
   }
 });
+
 async function exportChat() {
   try {
     const messages = await getAllMesseges();
@@ -96,5 +98,6 @@ async function exportChat() {
     console.log(e);
   }
 }
+
 openConnection();
 export { exportChat };
