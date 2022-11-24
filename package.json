@@ -19,9 +19,17 @@
   },
   "dependencies": {
     "@stomp/stompjs": "^6.1.2",
+    "body-parser": "^1.20.1",
     "bootstrap": "^5.2.1",
+
     "imgur": "^2.2.0",
+
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
+
     "jquery": "^3.6.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
     "sockjs": "^0.3.24",
     "sockjs-client": "^1.6.1",
     "websocket": "^1.0.34"
