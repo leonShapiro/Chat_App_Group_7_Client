@@ -122,13 +122,9 @@ const logoutUser = (user) => {
 
   loginFetchPromise.then((Response) => {
     if (Response.ok) {
-      alert("Yo")
-      // Response.text().then((text) => {
-      //   const myArray = text.split(":");
-      //   sessionStorage.setItem("nickName", myArray[0]);
-      //   sessionStorage.setItem("token", myArray[1]);
-      //   window.location.replace("./pages/chat.html");
-      // });
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("nickName");
+      window.location.replace("http://localhost:9000/");
     }
   });
 };

@@ -22,6 +22,10 @@ const onConnected = () => {
   }
 };
 
+$("#logOut-btn").on("click", () => {
+  stompClient.send("/app/bye", [], JSON.stringify({ name: sessionStorage.getItem("nickName") }));
+});
+
 const openConnection = () => {
   const socket = socketFactory();
   stompClient = Stomp.over(socket);
