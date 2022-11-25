@@ -6,6 +6,7 @@ import {
   createGuest,
   getAllMesseges,
   confirmUserAccount,
+  logoutUser
 } from "./rest";
 import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
@@ -31,6 +32,11 @@ $(() => {
       password: $("#passwordInput").val(),
     };
     loginUser(user);
+  });
+
+  $("#logOut-btn").on("click", () => {
+    const user = sessionStorage.getItem("nickName");
+    logoutUser(user);
   });
 
   $("#reg-btn").on("click", () => {
