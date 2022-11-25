@@ -29,6 +29,14 @@ const createUser = (user) => {
         );
       });
     }
+    else{
+      Response.text().then((text) => {
+        const errorArray = text.split(",")
+        const errorMessage1 = errorArray[3].split("\"")
+        const errorMessage2 = errorMessage1[3].split(":")
+        window.alert(errorMessage2[1])
+      })
+    }
   });
 };
 
