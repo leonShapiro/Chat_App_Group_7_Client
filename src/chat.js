@@ -1,10 +1,12 @@
 import $ from "jquery";
 import { getAllUsers } from "../src/rest";
-alert("fdsgsf");
+
 $(() => {
-  if (sessionStorage.getItem("token") == null) {
-    window.location.replace("http://localhost:9000/");
-  }
+ if (document.URL.includes("chat")) {
+   if (sessionStorage.getItem("token") == null) {
+     window.location.replace("http://localhost:9000/");
+   }
+ }
 
   displayUsers();
 
