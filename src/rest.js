@@ -142,35 +142,35 @@ async function getAllMesseges() {
     });
 }
 
-const confirmUserAccount = (id) => {
-  const esponse = fetch(serverAddress + "/auth/validateUser", {
-    method: "POST",
-    body: JSON.stringify(id),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  esponse.then((Response) => {
-    if (Response.ok) {
-      Response.text().then((text) => {
-        window.location.replace("http://localhost:9000/");
-      });
-    }
-  });
-};
-
-async function getAllUsers() {
-  return await fetch(serverAddress + "/user/getAll", {
-    method: "GET",
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      var users = JSON.stringify(data, null, "\t");
-      return users;
+  const confirmUserAccount = (id) => {
+    const esponse = fetch(serverAddress + "/auth/validateUser", {
+      method: "POST",
+      body: JSON.stringify(id),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-}
+    esponse.then((Response) => {
+      if (Response.ok) {
+        Response.text().then((text) => {
+          window.location.replace("http://localhost:9000/");
+        });
+      }
+    });
+  };
+
+  async function getAllUsers() {
+    return await fetch(serverAddress + "/user/getAll", {
+      method: "GET",
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        return data;
+   });
+    }
+
 
 export {
   createUser,
