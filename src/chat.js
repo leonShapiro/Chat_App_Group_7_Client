@@ -9,12 +9,18 @@ $(() => {
  }
 
 
-displayUsers();
+ window.onload = function () {
+        setTimeout(displayUsers(), 0.1); //Then set it to run again after ten minutes
+    }
+
+
   async function displayUsers() {
     try {
+      console.log("im happend!");
       const users = await getAllUsers();
-      users.sort(dynamicSort("userStatus"));
+      users.sort(dynamicSort_1("userStatus"));
       users.sort(dynamicSort("userType"));
+
       for (var key in users) {
         addUserToList(users[key]);
       }
@@ -29,12 +35,16 @@ displayUsers();
     ifAdmin(user);
 
     row.innerHTML = `
-              <td><a href=”“>${ifAdmin(user)} ${user.userStatus}</a></td>
-              <td><i class="bi bi-person"></i></td>
-          `;
+              <td><a href=”“>${ifAdmin(user)} <div class="${user.userStatus}-indicator"></div></a></td>`;
+
     list.appendChild(row);
   }
 // });
+
+
+function displayUserStatus(userStatus){
+  d
+}
 
 
 function ifAdmin(user){
@@ -90,20 +100,7 @@ $(".custom-menu li").on("click",function(){
 
 
 
-function dynamicSortMultiple() {
-    var props = arguments;
-    return function (obj1, obj2) {
-        var i = 0, result = 0, numberOfProperties = props.length;
-        /* try getting a different result from 0 (equal)
-         * as long as we have extra properties to compare
-         */
-        while(result === 0 && i < numberOfProperties) {
-            result = dynamicSort(props[i])(obj1, obj2);
-            i++;
-        }
-        return result;
-    }
-}
+
 
 
 
@@ -117,9 +114,28 @@ function dynamicSort(property) {
         /* next line works with strings and numbers, 
          * and you may want to customize it to your needs
          */
-   
         var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
         return result * sortOrder;
     }
 }
 });
+
+
+function dynamicSort_1(property) {
+var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        /* next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         */
+        var result = (a[property] < b[property]) ? 0: (a[property] > b[property]) ? -1 : 1;
+        return result * sortOrder;
+    }
+  
+}
+
+
+
