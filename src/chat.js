@@ -1,9 +1,12 @@
 import $ from "jquery";
 import { getAllUsers } from "../src/rest";
-// $(() => {
-//   if (sessionStorage.getItem("token") == null) {
-//     window.location.replace("http://localhost:9000/");
-//   }
+
+$(() => {
+ if (document.URL.includes("chat")) {
+   if (sessionStorage.getItem("token") == null) {
+     window.location.replace("http://localhost:9000/");
+   }
+ }
 
 
 displayUsers();
@@ -119,3 +122,4 @@ function dynamicSort(property) {
         return result * sortOrder;
     }
 }
+});
