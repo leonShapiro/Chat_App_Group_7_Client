@@ -142,8 +142,7 @@ async function getAllMesseges() {
         return response.json();
       })
       .then(function (data) {
-        var users = JSON.stringify(data, null, "\t");
-        return users;
+        return data;
       });
   }
 
