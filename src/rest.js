@@ -67,7 +67,7 @@ const createGuest = (user) => {
 };
 
 const createMessage = (token, message) => {
-  fetch(serverAddress + "/message/create", {
+  const messagePromise = fetch(serverAddress + "/message/create", {
     method: "POST",
     body: JSON.stringify({
       token: token,
@@ -76,6 +76,16 @@ const createMessage = (token, message) => {
     headers: {
       "Content-Type": "application/json",
     },
+  });
+
+  messagePromise.then((Response) => {
+    if (!Response.ok) {
+      Response.text().then((text) => {
+        const errorArray = text.split(",");
+        const errorMessage = errorArray[3].split("\"");
+        window.alert(errorMessage[3]);
+      });
+    } 
   });
 };
 
@@ -113,7 +123,7 @@ const logoutUser = (user) => {
   const loginFetchPromise = fetch(serverAddress + "/auth/logout", {
     method: "POST",
     body: JSON.stringify({
-      nickName : user
+      nickName: user,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -142,35 +152,48 @@ async function getAllMesseges() {
     });
 }
 
-  const confirmUserAccount = (id) => {
-    const esponse = fetch(serverAddress + "/auth/validateUser", {
-      method: "POST",
-      body: JSON.stringify(id),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    esponse.then((Response) => {
-      if (Response.ok) {
-        Response.text().then((text) => {
-          window.location.replace("http://localhost:9000/");
-        });
-      }
-    });
-  };
-
-  async function getAllUsers() {
-    return await fetch(serverAddress + "/user/getAll", {
-      method: "GET",
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        return data;
-   });
+const confirmUserAccount = (id) => {
+  const esponse = fetch(serverAddress + "/auth/validateUser", {
+    method: "POST",
+    body: JSON.stringify(id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  esponse.then((Response) => {
+    if (Response.ok) {
+      Response.text().then((text) => {
+        window.location.replace("http://localhost:9000/");
+      });
     }
+  });
+};
 
+async function getAllUsers() {
+  return await fetch(serverAddress + "/user/getAll", {
+    method: "GET",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      return data;
+    });
+}
+
+const muteUnmuteUser = (adminNickName, userNickName, status) => {
+  fetch(serverAddress + "/user/muteUnmute", {
+    method: "PATCH",
+    body: JSON.stringify({
+      adminNickName: adminNickName,
+      userNickName: userNickName,
+      status : status
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
 export {
   createUser,
@@ -180,5 +203,6 @@ export {
   getAllMesseges,
   confirmUserAccount,
   getAllUsers,
-  logoutUser
+  logoutUser,
+  muteUnmuteUser
 };

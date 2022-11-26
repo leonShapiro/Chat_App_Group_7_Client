@@ -1,15 +1,14 @@
 import $ from "jquery";
-import { getAllUsers } from "../src/rest";
+import { getAllUsers,muteUnmuteUser } from "../src/rest";
 
 $(() => {
- if (document.URL.includes("chat")) {
-   if (sessionStorage.getItem("token") == null) {
-     window.location.replace("http://localhost:9000/");
-   }
- }
+  if (document.URL.includes("chat")) {
+    if (sessionStorage.getItem("token") == null) {
+      window.location.replace("http://localhost:9000/");
+    }
+  }
 
-
-displayUsers();
+  displayUsers();
   async function displayUsers() {
     try {
       const users = await getAllUsers();
@@ -34,92 +33,84 @@ displayUsers();
           `;
     list.appendChild(row);
   }
-// });
+  // });
 
+  function ifAdmin(user) {
+    if (user.userType == "ADMIN") return "*" + user.nickName;
+    else return user.nickName;
+  }
 
-function ifAdmin(user){
-  if(user.userType == "ADMIN")
-  return "*"+user.nickName;
-
-  else return user.nickName;
-  
-}
-
-// Trigger action when the contexmenu is about to be shown
-$("#user-list").on("contextmenu", function (event) {
-    
+  // Trigger action when the contexmenu is about to be shown
+  $("#user-list").on("contextmenu", function (event) {
     // Avoid the real one
     event.preventDefault();
-    
+
     // Show contextmenu
-    $(".custom-menu").finish().toggle(100).
-    
-    // In the right position (the mouse)
-    css({
+    $(".custom-menu")
+      .finish()
+      .toggle(100)
+      // In the right position (the mouse)
+      .css({
         top: event.pageY + "px",
-        left: event.pageX + "px"
-    });
-});
+        left: event.pageX + "px",
+      });
+  });
 
-
-// If the document is clicked somewhere
-$(document).on("mousedown", function (e) {
-    
+  // If the document is clicked somewhere
+  $(document).on("mousedown", function (e) {
     // If the clicked element is not the menu
     if (!$(e.target).parents(".custom-menu").length > 0) {
-        
-        // Hide it
-        $(".custom-menu").hide(100);
+      // Hide it
+      $(".custom-menu").hide(100);
     }
-});
+  });
 
-// If the menu element is clicked
-$(".custom-menu li").on("click",function(){
-    
+  // If the menu element is clicked
+  $(".custom-menu li").on("click", function () {
     // This is the triggered action name
-    switch($(this).attr("data-action")) {
-        
-        // A case for each action. Your actions here
-        case "first": alert("first"); break;
+    switch ($(this).attr("data-action")) {
+      // A case for each action. Your actions here
+      case "first":
+        //alert("first");
+        //muteUnmuteUser(adminNickname,userNickname,newStatus);
+        break;
     }
-  
+
     // Hide it AFTER the action was triggered
     $(".custom-menu").hide(100);
   });
 
-
-
-
-function dynamicSortMultiple() {
+  function dynamicSortMultiple() {
     var props = arguments;
     return function (obj1, obj2) {
-        var i = 0, result = 0, numberOfProperties = props.length;
-        /* try getting a different result from 0 (equal)
-         * as long as we have extra properties to compare
-         */
-        while(result === 0 && i < numberOfProperties) {
-            result = dynamicSort(props[i])(obj1, obj2);
-            i++;
-        }
-        return result;
-    }
-}
+      var i = 0,
+        result = 0,
+        numberOfProperties = props.length;
+      /* try getting a different result from 0 (equal)
+       * as long as we have extra properties to compare
+       */
+      while (result === 0 && i < numberOfProperties) {
+        result = dynamicSort(props[i])(obj1, obj2);
+        i++;
+      }
+      return result;
+    };
+  }
 
-
-
-function dynamicSort(property) {
+  function dynamicSort(property) {
     var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
+    if (property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
     }
-    return function (a,b) {
-        /* next line works with strings and numbers, 
-         * and you may want to customize it to your needs
-         */
-   
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}
+    return function (a, b) {
+      /* next line works with strings and numbers,
+       * and you may want to customize it to your needs
+       */
+
+      var result =
+        a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+      return result * sortOrder;
+    };
+  }
 });
