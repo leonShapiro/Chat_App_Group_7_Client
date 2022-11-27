@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { getAllUsers,muteUnmuteUser } from "../src/rest";
+import { getAllUsers, muteUnmuteUser } from "../src/rest";
 
 $(() => {
   if (document.URL.includes("chat")) {
@@ -8,11 +8,9 @@ $(() => {
     }
   }
 
- window.onload = function () {
-        setTimeout(displayUsers(), 0.1); //Then set it to run again after ten minutes
-    }
-
-
+  window.onload = function () {
+    setTimeout(displayUsers(), 0.1); //Then set it to run again after ten minutes
+  };
 
   async function displayUsers() {
     try {
@@ -35,7 +33,9 @@ $(() => {
     ifAdmin(user);
 
     row.innerHTML = `
-              <td><a href=”“>${ifAdmin(user)} <div class="${user.userStatus}-indicator"></div></a></td>`;
+              <td><a href=”“>${ifAdmin(user)} <div class="${
+      user.userStatus
+    }-indicator"></div></a></td>`;
 
     list.appendChild(row);
   }
@@ -46,16 +46,10 @@ $(() => {
     else return user.nickName;
   }
 
-
-
-function ifAdmin(user){
-  if(user.userType == "ADMIN")
-  return "*"+user.nickName;
-
-  else return user.nickName;
-  
-}
-
+  function ifAdmin(user) {
+    if (user.userType == "ADMIN") return "*" + user.nickName;
+    else return user.nickName;
+  }
 
   // Trigger action when the contexmenu is about to be shown
   $("#user-list").on("contextmenu", function (event) {
@@ -97,55 +91,44 @@ function ifAdmin(user){
     $(".custom-menu").hide(100);
   });
 
-
-
-
-
-
-
-
   function dynamicSort(property) {
     var sortOrder = 1;
     if (property[0] === "-") {
       sortOrder = -1;
       property = property.substr(1);
     }
-    return function (a,b) {
-        /* next line works with strings and numbers, 
-         * and you may want to customize it to your needs
-         */
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}
     return function (a, b) {
       /* next line works with strings and numbers,
        * and you may want to customize it to your needs
        */
-
       var result =
         a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
       return result * sortOrder;
     };
   }
+  return function (a, b) {
+    /* next line works with strings and numbers,
+     * and you may want to customize it to your needs
+     */
+
+    var result =
+      a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+    return result * sortOrder;
+  };
 });
 
-
 function dynamicSort_1(property) {
-var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-        /* next line works with strings and numbers, 
-         * and you may want to customize it to your needs
-         */
-        var result = (a[property] < b[property]) ? 0: (a[property] > b[property]) ? -1 : 1;
-        return result * sortOrder;
-    }
-  
+  var sortOrder = 1;
+  if (property[0] === "-") {
+    sortOrder = -1;
+    property = property.substr(1);
+  }
+  return function (a, b) {
+    /* next line works with strings and numbers,
+     * and you may want to customize it to your needs
+     */
+    var result =
+      a[property] < b[property] ? 0 : a[property] > b[property] ? -1 : 1;
+    return result * sortOrder;
+  };
 }
-
-
-
