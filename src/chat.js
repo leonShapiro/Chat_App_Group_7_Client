@@ -15,7 +15,6 @@ $(() => {
 
   async function displayUsers() {
     try {
-      console.log("im happend!");
       const users = await getAllUsers();
       users.sort(dynamicSort_1("userStatus"));
       users.sort(dynamicSort("userType"));
@@ -28,17 +27,7 @@ $(() => {
     }
   }
 
-  // function addUserToList(user) {
-  //   const list = document.querySelector("#user-list");
-  //   const row = document.createElement("tr");
-  //   ifAdmin(user);
 
-  //   row.innerHTML = `
-  //             <td><a href=”“>${ifAdmin(user)} <div class="${user.userStatus}-indicator"></div></a></td> `;
-
-  //   list.appendChild(row);
-  // }
-  // // });
 
 
 function addUserToList(user) {
@@ -91,14 +80,6 @@ function addUserToList(user) {
               </div>
               <!--end modal-->`;
     list.appendChild(row);
-  }
-
-
-
-
-  function ifAdmin(user) {
-    if (user.userType == "ADMIN") return "*" + user.nickName;
-    else return user.nickName;
   }
 
 
