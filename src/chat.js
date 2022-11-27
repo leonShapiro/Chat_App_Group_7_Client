@@ -48,7 +48,7 @@ function addUserToList(user) {
     // getAllUsers();
     row.innerHTML = `
               <td><a href="#" data-toggle="modal" data-target="#profileModal${user.id}">
-              ${ifAdmin(user)} <div class="${user.userStatus}-indicator"></div></a></td>
+            ${ifAdmin(user)} <div class="${user.userStatus}-indicator"></div></a></td>
              <i class="bi bi-person"></i></td>
               <!-- start modal-->
               <div class="modal fade" id="profileModal${user.id}">
