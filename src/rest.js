@@ -119,6 +119,10 @@ const loginUser = (user) => {
   });
 };
 
+
+
+
+
 const logoutUser = (user) => {
   const loginFetchPromise = fetch(serverAddress + "/auth/logout", {
     method: "POST",
@@ -151,6 +155,22 @@ async function getAllMesseges() {
       return data;
     });
 }
+
+
+
+async function getLastestMesseges( lastMasseges) {
+  let result;
+  return await fetch(serverAddress + "/message/getAll", {
+    method: "GET",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      return data;
+    });
+}
+
 
 const confirmUserAccount = (id) => {
   const esponse = fetch(serverAddress + "/auth/validateUser", {
