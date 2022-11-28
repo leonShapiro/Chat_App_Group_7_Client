@@ -100,13 +100,13 @@ $(() => {
     var id = queryString.substring(queryString.lastIndexOf("=") + 1);
     confirmUserAccount(id);
   });
-});
 
-$("#export-btn").on("click", async () => {
-  const messages = await getAllMesseges();
-  var jsonObj = messages.map((o) => Object.values(o).join(" : "));
-  var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
-  downloadCSV(jsonObject);
+  $("#export-btn").on("click", async () => {
+    const messages = await getAllMesseges();
+    var jsonObj = messages.map((o) => Object.values(o).join(" : "));
+    var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
+    downloadCSV(jsonObject);
+  });
 });
 
 function downloadCSV(csvStr) {
