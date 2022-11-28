@@ -1,0 +1,11 @@
+ event.preventDefault();
+    switch ($(this).attr("data-action")) {
+      case "muteOrUnmute":
+          console.log("Ds");
+          const id = event.target.id;
+          console.log(id);
+          const user = getUserByID(id)
+          console.log(user);
+          muteUnmuteUser(sessionStorage.getItem("niceName"),user.nickName,user.userStatus);
+        break;
+    }

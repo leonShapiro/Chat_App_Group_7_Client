@@ -1,6 +1,7 @@
 import $ from "jquery";
 import { getAllUsers,muteUnmuteUser } from "../src/rest";
-
+let id;
+let users=[];
 $(() => {
   if (document.URL.includes("chat")) {
     if (sessionStorage.getItem("token") == null) {
@@ -15,10 +16,9 @@ $(() => {
 
   async function displayUsers() {
     try {
-      const users = await getAllUsers();
+      users = await getAllUsers();
       users.sort(dynamicSort_1("userStatus"));
       users.sort(dynamicSort("userType"));
-
       for (var key in users) {
         addUserToList(users[key]);
       }
@@ -28,15 +28,15 @@ $(() => {
   }
 
 
-
-
 function addUserToList(user) {
+    
+
     const list = document.querySelector("#user-list");
-    const row = document.createElement("tr");
+    const row = document.createElement("tr",user.id);
     ifAdmin(user);
-    // getAllUsers();
-    row.innerHTML = `
-              <td><a href="#" data-toggle="modal" data-target="#profileModal${user.id}">
+
+    row.innerHTML =   `
+              <td><a id=${user.id} contextmenu="custom-menu" href="#" data-toggle="modal" data-target="#profileModal${user.id}">
             ${ifAdmin(user)} <div class="${user.userStatus}-indicator"></div></a></td>
              <i class="bi bi-person"></i></td>
               <!-- start modal-->
@@ -87,52 +87,55 @@ function addUserToList(user) {
 function ifAdmin(user){
   if(user.userType == "ADMIN")
   return "*"+user.nickName;
-
   else return user.nickName;
   
 }
 
 
-  // Trigger action when the contexmenu is about to be shown
-  $("#user-list").on("contextmenu", function (event) {
-    // Avoid the real one
-    event.preventDefault();
+function getUserById(id){
+ const user = users.filter(user => user.id ==id);
+  return user;
+  }
 
-    // Show contextmenu
+// Trigger action when the contexmenu is about to be shown
+  $("#user-list").on("contextmenu", function (event) {
+    id=event.target.id;
+    event.preventDefault();
     $(".custom-menu")
       .finish()
       .toggle(100)
-      // In the right position (the mouse)
       .css({
         top: event.pageY + "px",
         left: event.pageX + "px",
       });
   });
 
-  // If the document is clicked somewhere
   $(document).on("mousedown", function (e) {
-    // If the clicked element is not the menu
     if (!$(e.target).parents(".custom-menu").length > 0) {
-      // Hide it
       $(".custom-menu").hide(100);
     }
   });
 
-  // If the menu element is clicked
-  $(".custom-menu li").on("click", function () {
-    // This is the triggered action name
-    switch ($(this).attr("data-action")) {
-      // A case for each action. Your actions here
-      case "first":
-        //alert("first");
-        //muteUnmuteUser(adminNickname,userNickname,newStatus);
-        break;
-    }
+  $(".custom-menu li").on("click", function (event)  {
+      const user = getUserById(id);
+      switch ($(this).attr("data-action")) {
+      case "mute":
+      let textButton=event.target.textContent;
+      muteUnmuteUser(sessionStorage.getItem("nickName"),user[0].nickName,textButton);
+      break;
 
-    // Hide it AFTER the action was triggered
+      case "unmute":
+      textButton=event.target.textContent;
+      muteUnmuteUser(sessionStorage.getItem("nickName"),user[0].nickName,textButton);
+      break;
+
+
+
+    }
     $(".custom-menu").hide(100);
   });
 
+   
 
   function dynamicSort(property) {
     var sortOrder = 1;
