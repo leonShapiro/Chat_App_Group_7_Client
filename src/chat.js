@@ -7,22 +7,17 @@ $(() => {
     if (sessionStorage.getItem("token") == null) {
       window.location.replace("http://localhost:9000/");
     }
+    displayUsers();
+    setInterval(function () {
+      displayUsers();
+    }, 15000);
   }
 
-
-
-displayUsers()
-setInterval(function () { displayUsers() },15000);
-
-
   async function displayUsers() {
- 
     try {
-      $('#user-list').empty();
+      $("#user-list").empty();
       console.log("im here");
       users = await getAllUsers();
-      users.sort(dynamicSort("userStatus"));
-      users.sort(dynamicSort("userType"));
       for (var key in users) {
         addUserToList(users[key]);
       }
@@ -31,9 +26,7 @@ setInterval(function () { displayUsers() },15000);
     }
   }
 
-
-function addUserToList(user) {
-   
+  function addUserToList(user) {
     const list = document.querySelector("#user-list");
     const row = document.createElement("tr", user.id);
     ifAdmin(user);
@@ -181,28 +174,4 @@ function addUserToList(user) {
     }
     $(".custom-menu").hide(100);
   });
-
-  function dynamicSort(property) {
-    var sortOrder = 1;
-    if (property[0] === "-") {
-      sortOrder = -1;
-      property = property.substr(1);
-    }
-    return function (a, b) {
-      /* next line works with strings and numbers,
-       * and you may want to customize it to your needs
-       */
-      var result =
-        a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
-      return result * sortOrder;
-    };
-  }
-  return function (a, b) {
-    var result =
-      a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
-    return result * sortOrder;
-  };
 });
-
-
-
