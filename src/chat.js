@@ -30,10 +30,6 @@ $(() => {
     const list = document.querySelector("#user-list");
     const row = document.createElement("tr", user.id);
     ifAdmin(user);
-    console.log(user);
-    console.log(user.verified);
-    console.log("----------------");
-    //-------------------------------------------------
     if (user.privacyStatus == "PUBLIC") {
       row.innerHTML = `
               <td><a id=${
