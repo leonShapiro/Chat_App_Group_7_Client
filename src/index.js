@@ -74,8 +74,15 @@ $(() => {
     if ($("#descriptionInput").val().length > 0) {
       user.description = $("#descriptionInput").val();
     }
+    if (document.getElementById("publicProfile").checked) {
+      user.privacyStatus = "PUBLIC";
+    }
+    if (document.getElementById("privateProfile").checked) {
+      user.privacyStatus = "PRIVATE";
+    }
+
     window.localStorage.setItem("user", JSON.stringify(user)); // save user locally.
-    console.log(user);
+    // console.log(user);
     sessionStorage.setItem("registerEmail", user.email);
     createUser(user);
   });
