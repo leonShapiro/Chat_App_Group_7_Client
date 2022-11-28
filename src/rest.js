@@ -156,8 +156,6 @@ async function getAllMesseges() {
     });
 }
 
-
-
 async function getLastestMesseges( lastMasseges) {
   let result;
   return await fetch(serverAddress + "/message/getAll", {
