@@ -125,10 +125,9 @@ function getUserById(id){
       break;
 
       case "unmute":
-      textButton=event.target.textContent;
-      muteUnmuteUser(sessionStorage.getItem("nickName"),user[0].nickName,textButton);
+      let textButton1=event.target.textContent;
+      muteUnmuteUser(sessionStorage.getItem("nickName"),user.nickName,textButton1);
       break;
-
 
 
     }
