@@ -15,6 +15,7 @@ const createUser = (user) => {
       dateOfBirth: user.dateOfBirth,
       description: user.description,
       url: urlstr,
+      privacyStatus: user.privacyStatus,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +83,7 @@ const createMessage = (token, message) => {
     if (!Response.ok) {
       Response.text().then((text) => {
         const errorArray = text.split(",");
-        const errorMessage = errorArray[3].split("\"");
+        const errorMessage = errorArray[3].split('"');
         window.alert(errorMessage[3]);
       });
     }
@@ -113,7 +114,7 @@ const loginUser = (user) => {
     } else {
       Response.text().then((text) => {
         const errorArray = text.split(",");
-        const errorMessage = errorArray[3].split("\"");
+        const errorMessage = errorArray[3].split('"');
         window.alert(errorMessage[3]);
       });
     }

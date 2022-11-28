@@ -60,6 +60,13 @@
             <input type="password" class="form-control" id="passwordInputConfirm" maxlength="20" pattern="^(?=.*[0-9])(?=.*[A-Za-z]).{8,20}$">
             <span id='messagepassword'></span>
           </div>
+
+          <div class="mb-3">
+            <label for="privacyStatus">Profile privacy status: </label><br>
+            <input type="radio" id="publicProfile" name="privacyStatus" value="PUBLIC" checked="checked">Public</input><br>
+            <input type="radio" id="privateProfile" name="privacyStatus" value="PRIVATE">Private</input>
+          </div>
+
           <hr class="myHR">
           <h6>Complete yor profile with optional information:</h6>
 

@@ -1,15 +1,19 @@
 import $ from "jquery";
-import { getAllUsers,muteUnmuteUser } from "../src/rest";
+import { getAllUsers, muteUnmuteUser } from "../src/rest";
 let id;
-let users=[];
+let users = [];
 $(() => {
   if (document.URL.includes("chat")) {
     if (sessionStorage.getItem("token") == null) {
       window.location.replace("http://localhost:9000/");
     }
   }
+
+
+
 displayUsers()
 setInterval(function () { displayUsers() },15000);
+
 
   async function displayUsers() {
  
@@ -17,7 +21,7 @@ setInterval(function () { displayUsers() },15000);
       $('#user-list').empty();
       console.log("im here");
       users = await getAllUsers();
-      users.sort(dynamicSort_1("userStatus"));
+      users.sort(dynamicSort("userStatus"));
       users.sort(dynamicSort("userType"));
       for (var key in users) {
         addUserToList(users[key]);
@@ -29,14 +33,20 @@ setInterval(function () { displayUsers() },15000);
 
 
 function addUserToList(user) {
-    
+   
     const list = document.querySelector("#user-list");
-    const row = document.createElement("tr",user.id);
+    const row = document.createElement("tr", user.id);
     ifAdmin(user);
-
-    row.innerHTML =   `
-              <td><a id=${user.id} contextmenu="custom-menu" href="#" data-toggle="modal" data-target="#profileModal${user.id}">
-            ${ifAdmin(user)} <div class="${user.userStatus}-indicator"></div></a></td>
+    if (user.privacyStatus == "PUBLIC") {
+      row.innerHTML = `
+              <td><a id=${
+                user.id
+              } contextmenu="custom-menu" href="#" data-toggle="modal" data-target="#profileModal${
+        user.id
+      }">
+            ${ifAdmin(user)} <div class="${
+        user.userStatus
+      }-indicator"></div></a></td>
              <i class="bi bi-person"></i></td>
               <!-- start modal-->
               <div class="modal fade" id="profileModal${user.id}">
@@ -55,7 +65,6 @@ function addUserToList(user) {
                       Last name: <span id="lnameNameP">${
                         user.lastName
                       }</span><br />
-                      Age: <span id="ageP">${user.dateOfBirth}</span><br />
                       Date of birh: <span id="bdayNameP">${
                         user.dateOfBirth
                       }</span><br />
@@ -78,27 +87,61 @@ function addUserToList(user) {
               </div>
               </div>
               <!--end modal-->`;
+    } else {
+      row.innerHTML = `
+                <td><a id=${
+                  user.id
+                } contextmenu="custom-menu" href="#" data-toggle="modal" data-target="#profileModal${
+        user.id
+      }">
+              ${ifAdmin(user)} <div class="${
+        user.userStatus
+      }-indicator"></div></a></td>
+               <i class="bi bi-person"></i></td>
+                <!-- start modal-->
+                <div class="modal fade" id="profileModal${user.id}">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Private profile</h5>
+                    </div>
+                    <div class="modal-body">
+                      <div class="profileContent">
+                        Nickname: <span">${user.nickName}</span><br />
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <!--end modal-->`;
+    }
+
     list.appendChild(row);
   }
 
-
-
-function ifAdmin(user){
-  if(user.userType == "ADMIN")
-  return "*"+user.nickName;
-  else return user.nickName;
-  
-}
-
-
-function getUserById(id){
- const user = users.filter(user => user.id ==id);
-  return user;
+  function ifAdmin(user) {
+    if (user.userType == "ADMIN") return "*" + user.nickName;
+    else return user.nickName;
   }
 
-// Trigger action when the contexmenu is about to be shown
+  function getUserById(id) {
+    const user = users.filter((user) => user.id == id);
+    return user;
+  }
+
+  // Trigger action when the contexmenu is about to be shown
   $("#user-list").on("contextmenu", function (event) {
-    id=event.target.id;
+    id = event.target.id;
     event.preventDefault();
     $(".custom-menu")
       .finish()
@@ -115,25 +158,29 @@ function getUserById(id){
     }
   });
 
-  $(".custom-menu li").on("click", function (event)  {
-      const user = getUserById(id);
-      switch ($(this).attr("data-action")) {
+  $(".custom-menu li").on("click", function (event) {
+    const user = getUserById(id);
+    switch ($(this).attr("data-action")) {
       case "mute":
-      let textButton=event.target.textContent;
-      muteUnmuteUser(sessionStorage.getItem("nickName"),user[0].nickName,textButton);
-      break;
+        let textButton = event.target.textContent;
+        muteUnmuteUser(
+          sessionStorage.getItem("nickName"),
+          user[0].nickName,
+          textButton
+        );
+        break;
 
       case "unmute":
-      let textButton1=event.target.textContent;
-      muteUnmuteUser(sessionStorage.getItem("nickName"),user.nickName,textButton1);
-      break;
-
-
+        let textButton1 = event.target.textContent;
+        muteUnmuteUser(
+          sessionStorage.getItem("nickName"),
+          user.nickName,
+          textButton1
+        );
+        break;
     }
     $(".custom-menu").hide(100);
   });
-
-   
 
   function dynamicSort(property) {
     var sortOrder = 1;
@@ -141,37 +188,21 @@ function getUserById(id){
       sortOrder = -1;
       property = property.substr(1);
     }
-    return function (a,b) {
-        /* next line works with strings and numbers, 
-         * and you may want to customize it to your needs
-         */
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    }
-}
     return function (a, b) {
+      /* next line works with strings and numbers,
+       * and you may want to customize it to your needs
+       */
       var result =
         a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
       return result * sortOrder;
     };
   }
-);
-
-function dynamicSort_1(property) {
-var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-        /* next line works with strings and numbers, 
-         * and you may want to customize it to your needs
-         */
-        var result = (a[property] < b[property]) ? 0: (a[property] > b[property]) ? -1 : 1;
-        return result * sortOrder;
-    }
-  
-}
+  return function (a, b) {
+    var result =
+      a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+    return result * sortOrder;
+  };
+});
 
 
 
