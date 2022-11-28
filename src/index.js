@@ -34,6 +34,12 @@ $(() => {
     }
   });
 
+  $("#message-input").keypress(function (event) {
+    if (event.keyCode === 13) {
+      $("#send-btn").click();
+    }
+  });
+
   $("#login-btn").on("click", () => {
     const user = {
       email: $("#emailInput").val(),
