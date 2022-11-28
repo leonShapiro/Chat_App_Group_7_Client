@@ -6,7 +6,7 @@ import {
   createGuest,
   getAllMesseges,
   confirmUserAccount,
-  logoutUser
+  logoutUser,
 } from "./rest";
 import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
@@ -16,14 +16,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 $(() => {
   $("#send-btn").on("click", () => {
     const message = $("#message-input").val();
-    const token = sessionStorage.getItem("token");
+    if (message != "") {
+      const token = sessionStorage.getItem("token");
 
-    createMessage(token, message);
-    sendPlainMessage(
-      sessionStorage.getItem("nickName"),
-      $("#message-input").val()
-    );
-    document.getElementById("message-input").value = "";
+      createMessage(token, message);
+      sendPlainMessage(
+        sessionStorage.getItem("nickName"),
+        $("#message-input").val()
+      );
+      document.getElementById("message-input").value = "";
+    }
+  });
+
+  $("#message-input").keypress(function (event) {
+    if (event.keyCode === 13) {
+      $("#send-btn").click();
+    }
   });
 
   $("#login-btn").on("click", () => {
