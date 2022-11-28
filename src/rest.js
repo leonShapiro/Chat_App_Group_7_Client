@@ -85,7 +85,7 @@ const createMessage = (token, message) => {
         const errorMessage = errorArray[3].split("\"");
         window.alert(errorMessage[3]);
       });
-    } 
+    }
   });
 };
 
@@ -112,16 +112,12 @@ const loginUser = (user) => {
     } else {
       Response.text().then((text) => {
         const errorArray = text.split(",");
-        const errorMessage = errorArray[3].split('"');
+        const errorMessage = errorArray[3].split("\"");
         window.alert(errorMessage[3]);
       });
     }
   });
 };
-
-
-
-
 
 const logoutUser = (user) => {
   const loginFetchPromise = fetch(serverAddress + "/auth/logout", {
@@ -156,7 +152,7 @@ async function getAllMesseges() {
     });
 }
 
-async function getLastestMesseges( lastMasseges) {
+async function getLastestMesseges(lastMasseges) {
   let result;
   return await fetch(serverAddress + "/message/getAll", {
     method: "GET",
@@ -168,7 +164,6 @@ async function getLastestMesseges( lastMasseges) {
       return data;
     });
 }
-
 
 const confirmUserAccount = (id) => {
   const esponse = fetch(serverAddress + "/auth/validateUser", {
@@ -205,7 +200,7 @@ const muteUnmuteUser = (adminNickName, userNickName, status) => {
     body: JSON.stringify({
       adminNickName: adminNickName,
       userNickName: userNickName,
-      status : status
+      status: status,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -222,5 +217,5 @@ export {
   confirmUserAccount,
   getAllUsers,
   logoutUser,
-  muteUnmuteUser
+  muteUnmuteUser,
 };
