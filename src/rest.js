@@ -99,6 +99,7 @@ const loginUser = (user) => {
     headers: {
       "Content-Type": "application/json",
     },
+    
   });
 
   loginFetchPromise.then((Response) => {

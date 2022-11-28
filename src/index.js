@@ -46,6 +46,7 @@ $(() => {
       password: $("#passwordInput").val(),
     };
     loginUser(user);
+    displayUsers();
   });
 
   $("#logOut-btn").on("click", () => {

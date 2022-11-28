@@ -8,14 +8,14 @@ $(() => {
       window.location.replace("http://localhost:9000/");
     }
   }
-
- window.onload = function () {
-        setTimeout(displayUsers(), 0.1); //Then set it to run again after ten minutes
-    }
-
+displayUsers()
+setInterval(function () { displayUsers() },15000);
 
   async function displayUsers() {
+ 
     try {
+      $('#user-list').empty();
+      console.log("im here");
       users = await getAllUsers();
       users.sort(dynamicSort_1("userStatus"));
       users.sort(dynamicSort("userType"));
@@ -30,7 +30,6 @@ $(() => {
 
 function addUserToList(user) {
     
-
     const list = document.querySelector("#user-list");
     const row = document.createElement("tr",user.id);
     ifAdmin(user);
@@ -173,4 +172,6 @@ var sortOrder = 1;
     }
   
 }
+
+
 
