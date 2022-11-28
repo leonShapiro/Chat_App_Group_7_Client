@@ -9,14 +9,19 @@ $(() => {
     }
   }
 
-  window.onload = function () {
-    setTimeout(displayUsers(), 0.1); //Then set it to run again after ten minutes
-  };
+
+
+displayUsers()
+setInterval(function () { displayUsers() },15000);
+
 
   async function displayUsers() {
+ 
     try {
+      $('#user-list').empty();
+      console.log("im here");
       users = await getAllUsers();
-      users.sort(dynamicSort_1("userStatus"));
+      users.sort(dynamicSort("userStatus"));
       users.sort(dynamicSort("userType"));
       for (var key in users) {
         addUserToList(users[key]);
@@ -26,7 +31,9 @@ $(() => {
     }
   }
 
-  function addUserToList(user) {
+
+function addUserToList(user) {
+   
     const list = document.querySelector("#user-list");
     const row = document.createElement("tr", user.id);
     ifAdmin(user);
@@ -197,18 +204,5 @@ $(() => {
   };
 });
 
-function dynamicSort_1(property) {
-  var sortOrder = 1;
-  if (property[0] === "-") {
-    sortOrder = -1;
-    property = property.substr(1);
-  }
-  return function (a, b) {
-    /* next line works with strings and numbers,
-     * and you may want to customize it to your needs
-     */
-    var result =
-      a[property] < b[property] ? 0 : a[property] > b[property] ? -1 : 1;
-    return result * sortOrder;
-  };
-}
+
+
