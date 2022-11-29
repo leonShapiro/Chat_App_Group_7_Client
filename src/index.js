@@ -7,6 +7,7 @@ import {
   getAllMesseges,
   confirmUserAccount,
   logoutUser,
+  getLatestMessages
 } from "./rest";
 import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
@@ -102,7 +103,7 @@ $(() => {
   });
 
   $("#export-btn").on("click", async () => {
-    const messages = await getAllMesseges();
+    const messages = await getLatestMessages();
     var jsonObj = messages.map((o) => Object.values(o).join(" : "));
     var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
     downloadCSV(jsonObject);

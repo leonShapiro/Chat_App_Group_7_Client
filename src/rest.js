@@ -154,6 +154,22 @@ async function getAllMesseges() {
     });
 }
 
+
+
+async function getLatestMessages() {
+  let result;
+  return await fetch(serverAddress + "/message/getLatest", {
+    method: "GET",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      return data;
+    });
+}
+
+
 const confirmUserAccount = (id) => {
   const esponse = fetch(serverAddress + "/auth/validateUser", {
     method: "POST",
@@ -207,4 +223,5 @@ export {
   getAllUsers,
   logoutUser,
   muteUnmuteUser,
+  getLatestMessages
 };
