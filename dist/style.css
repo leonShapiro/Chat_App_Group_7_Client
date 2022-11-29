@@ -1,6 +1,4 @@
-a {
-  text-decoration: none;
-}
+
 
 :root {
   --bodyBg: rgb(32, 30, 30);
@@ -101,3 +99,6 @@ footer:hover {
     display: none;
   }
 }
+
+
+

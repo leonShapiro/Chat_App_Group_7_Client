@@ -6,6 +6,7 @@ import {
   checkOfflineUsers,
   switchStatus,
   getUserByNickname,
+  getLatestMessages
 } from "../src/rest";
 let id;
 let users = [];
@@ -27,6 +28,8 @@ $(() => {
     }, 21000);
   }
 
+
+ 
   async function displayUsers() {
     try {
       $("#user-list").empty();
@@ -34,6 +37,20 @@ $(() => {
       for (var key in users) {
         addUserToList(users[key]);
       }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+   displayMessages();
+
+  async function displayMessages() {
+    try {
+       $("#main-chat").empty();
+      let textArea = $("#main-chat");
+      const messages = await getLatestMessages();
+      messages.forEach(message => {
+      textArea.val(textArea.val() + "\n" + message.sender + ": " + message.content);});
     } catch (e) {
       console.log(e);
     }
@@ -60,12 +77,14 @@ $(() => {
 
   function getUserById(id) {
     const user = users.filter((user) => user.id == id);
+    console.log();
     return user;
   }
 
   // Trigger action when the contexmenu is about to be shown
   $("#user-list").on("contextmenu", function (event) {
     id = event.target.id;
+    console.log(id);
     event.preventDefault();
     $(".custom-menu")
       .finish()
@@ -75,7 +94,6 @@ $(() => {
         left: event.pageX + "px",
       });
   });
-
   $(document).on("mousedown", function (e) {
     if (!$(e.target).parents(".custom-menu").length > 0) {
       $(".custom-menu").hide(100);
@@ -84,6 +102,7 @@ $(() => {
 
   $(".custom-menu li").on("click", function (event) {
     const user = getUserById(id);
+    console.log(user[0].nickName);
     switch ($(this).attr("data-action")) {
       case "mute":
         muteUnmuteUser(
@@ -97,7 +116,7 @@ $(() => {
         muteUnmuteUser(
           sessionStorage.getItem("nickName"),
           user[0].nickName,
-          "unmute"
+          textButton1
         );
         break;
 

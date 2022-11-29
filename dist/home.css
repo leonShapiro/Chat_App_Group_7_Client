@@ -1,19 +1,18 @@
-:root{
-
---bodyBg:rgb(240, 236, 236);
-}
 
 body{
-    background-color: var(--bodyBg);
+    background-color: black;
 }
 
 
 
 main{
+
 position:relative;
 width:1000px;
 height:750px;
 top: 10vh;
+
+
 }
 
 form{
