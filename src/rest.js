@@ -100,7 +100,6 @@ const loginUser = (user) => {
     headers: {
       "Content-Type": "application/json",
     },
-    
   });
 
   loginFetchPromise.then((Response) => {
@@ -155,14 +154,14 @@ async function getAllMesseges() {
 }
 
 const confirmUserAccount = (id) => {
-  const esponse = fetch(serverAddress + "/auth/validateUser", {
+  const response = fetch(serverAddress + "/auth/validateUser", {
     method: "POST",
     body: JSON.stringify(id),
     headers: {
       "Content-Type": "application/json",
     },
   });
-  esponse.then((Response) => {
+  response.then((Response) => {
     if (Response.ok) {
       Response.text().then((text) => {
         window.location.replace("http://localhost:9000/");
@@ -197,6 +196,45 @@ const muteUnmuteUser = (adminNickName, userNickName, status) => {
   });
 };
 
+const getUserByNickname = (userNickName) => {
+  const response = fetch(serverAddress + "/user/getUserByNickname", {
+    method: "PATCH",
+    body: userNickName,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  response.then((Response) => {
+    if (Response.ok) {
+      Response.text().then((text) => {
+        var user = JSON.parse(text);
+        console.log(user);
+        const row = document.createElement("div", user.id);
+        if (user.privacyStatus == "PUBLIC") {
+          document.getElementById("profileDiv").innerHTML = ` 
+          Nickname: ${user.nickName} <br> 
+          First name: ${user.firstName}<br>
+          Last name: ${user.firstName}<br>
+          Email name: ${user.lastName}<br>
+          Date Of Birth: ${user.dateOfBirth}<br>
+          Description: ${user.description}`;
+        }
+        if (user.privacyStatus == "PRIVATE") {
+          document.getElementById("profileDiv").innerHTML =
+            "This profile is private";
+        }
+        if (user.userType == "GUEST") {
+          document.getElementById("profileDiv").innerHTML = `
+          The user ${user.nickName} is a guest 
+          `;
+        }
+      });
+    } else {
+      alert("no such nickname ... error press on the nickname!");
+    }
+  });
+};
+
 export {
   createUser,
   createMessage,
@@ -207,4 +245,5 @@ export {
   getAllUsers,
   logoutUser,
   muteUnmuteUser,
+  getUserByNickname,
 };
