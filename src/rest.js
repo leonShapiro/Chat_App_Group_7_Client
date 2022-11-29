@@ -191,6 +191,15 @@ const muteUnmuteUser = (adminNickName, userNickName, status) => {
   });
 };
 
+const switchStatus = (nickName) => {
+  fetch(serverAddress + "/user/awayOnline?nickName=" + nickName, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 const keepAlive = (userNickname) => {
   fetch(serverAddress + "/user/keepAlive", {
     method: "POST",
@@ -218,5 +227,6 @@ export {
   logoutUser,
   muteUnmuteUser,
   keepAlive,
-  checkOfflineUsers
+  checkOfflineUsers,
+  switchStatus
 };

@@ -4,6 +4,7 @@ import {
   muteUnmuteUser,
   keepAlive,
   checkOfflineUsers,
+  switchStatus,
 } from "../src/rest";
 let id;
 let users = [];
@@ -175,12 +176,17 @@ $(() => {
         break;
 
       case "unmute":
-        let textButton1 = event.target.textContent;
         muteUnmuteUser(
           sessionStorage.getItem("nickName"),
           user[0].nickName,
           "unmute"
         );
+        break;
+
+      case "SwitchStatus":
+        if (sessionStorage.getItem("nickName") == user[0].nickName) {
+          switchStatus(sessionStorage.getItem("nickName"));
+        }
         break;
     }
     $(".custom-menu").hide(100);
