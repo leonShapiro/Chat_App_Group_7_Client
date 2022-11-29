@@ -100,7 +100,6 @@ const loginUser = (user) => {
     headers: {
       "Content-Type": "application/json",
     },
-    
   });
 
   loginFetchPromise.then((Response) => {
@@ -197,6 +196,22 @@ const muteUnmuteUser = (adminNickName, userNickName, status) => {
   });
 };
 
+const keepAlive = (userNickname) => {
+  fetch(serverAddress + "/user/keepAlive", {
+    method: "POST",
+    body:  userNickname,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+const checkOfflineUsers = () => {
+   fetch(serverAddress + "/user/checkOfflineUsers", {
+    method: "GET",
+  })
+}
+
 export {
   createUser,
   createMessage,
@@ -207,4 +222,6 @@ export {
   getAllUsers,
   logoutUser,
   muteUnmuteUser,
+  keepAlive,
+  checkOfflineUsers
 };

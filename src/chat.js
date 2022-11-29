@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { getAllUsers, muteUnmuteUser } from "../src/rest";
+import { getAllUsers, muteUnmuteUser, keepAlive,checkOfflineUsers} from "../src/rest";
 let id;
 let users = [];
 $(() => {
@@ -11,12 +11,14 @@ $(() => {
     setInterval(function () {
       displayUsers();
     }, 15000);
+
+    setInterval(function () {keepAlive(sessionStorage.getItem("nickName"))}, 10000)
+    setInterval(function () {checkOfflineUsers()}, 21000)
   }
 
   async function displayUsers() {
     try {
       $("#user-list").empty();
-      console.log("im here");
       users = await getAllUsers();
       for (var key in users) {
         addUserToList(users[key]);
@@ -30,6 +32,7 @@ $(() => {
     const list = document.querySelector("#user-list");
     const row = document.createElement("tr", user.id);
     ifAdmin(user);
+    
     if (user.privacyStatus == "PUBLIC") {
       row.innerHTML = `
               <td><a id=${
@@ -167,7 +170,7 @@ $(() => {
         let textButton1 = event.target.textContent;
         muteUnmuteUser(
           sessionStorage.getItem("nickName"),
-          user.nickName,
+          user[0].nickName,
           textButton1
         );
         break;
