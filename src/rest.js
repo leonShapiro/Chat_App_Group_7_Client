@@ -183,12 +183,21 @@ async function getAllUsers() {
 }
 
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
-  fetch(serverAddress + "/user/muteUnmute?adminNickName=" + adminNickName + "&userNickName=" + userNickName + "&status=" + status, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  fetch(
+    serverAddress +
+      "/user/muteUnmute?adminNickName=" +
+      adminNickName +
+      "&userNickName=" +
+      userNickName +
+      "&status=" +
+      status,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 const switchStatus = (nickName) => {
@@ -203,7 +212,7 @@ const switchStatus = (nickName) => {
 const keepAlive = (userNickname) => {
   fetch(serverAddress + "/user/keepAlive", {
     method: "POST",
-    body:  userNickname,
+    body: userNickname,
     headers: {
       "Content-Type": "application/json",
     },
@@ -211,10 +220,49 @@ const keepAlive = (userNickname) => {
 };
 
 const checkOfflineUsers = () => {
-   fetch(serverAddress + "/user/checkOfflineUsers", {
+  fetch(serverAddress + "/user/checkOfflineUsers", {
     method: "GET",
-  })
-}
+  });
+};
+
+const getUserByNickname = (userNickName) => {
+  const response = fetch(serverAddress + "/user/getUserByNickname", {
+    method: "POST",
+    body: userNickName,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  response.then((Response) => {
+    if (Response.ok) {
+      Response.text().then((text) => {
+        var user = JSON.parse(text);
+        console.log(user);
+        const row = document.createElement("div", user.id);
+        if (user.privacyStatus == "PUBLIC") {
+          document.getElementById("profileDiv").innerHTML = ` 
+          Nickname: ${user.nickName} <br> 
+          First name: ${user.firstName}<br>
+          Last name: ${user.firstName}<br>
+          Email name: ${user.lastName}<br>
+          Date Of Birth: ${user.dateOfBirth}<br>
+          Description: ${user.description}`;
+        }
+        if (user.privacyStatus == "PRIVATE") {
+          document.getElementById("profileDiv").innerHTML =
+            "This profile is private";
+        }
+        if (user.userType == "GUEST") {
+          document.getElementById("profileDiv").innerHTML = `
+          The user ${user.nickName} is a guest 
+          `;
+        }
+      });
+    } else {
+      alert("no such nickname ... error press on the nickname!");
+    }
+  });
+};
 
 export {
   createUser,
@@ -228,5 +276,6 @@ export {
   muteUnmuteUser,
   keepAlive,
   checkOfflineUsers,
-  switchStatus
+  switchStatus,
+  getUserByNickname,
 };
