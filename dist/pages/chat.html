@@ -32,8 +32,9 @@
 
    <ul class='custom-menu'>
   <li data-action = "mute">mute</li>
-    <li data-action = "unmute">unmute</li>
+  <li data-action = "unmute">unmute</li>
   <li data-action = "contactInfo">Contact info</li>
+  <li data-action = "SwitchStatus">SwitchStatus</li>
 </ul>
       
 
@@ -43,7 +44,7 @@
 
 
       </div>
-      <div class="col-9">
+      <div class="col-6">
         <textarea class="form-control" id="main-chat" rows="20" readonly></textarea>
         <div class="input-group mb-3">
           <input type="text" id="message-input" class="form-control" placeholder="Type your message here..." aria-describedby="send-btn">
@@ -52,6 +53,12 @@
            <button class="btn btn-outline-secondary" type="button" id="logOut-btn">Log Out</button>
            <button id="export-btn" style='font-size:16px'> <i class='fas fa-file-export' style='font-size:12px' > Export</i>
       </div>
+
+      <div class="col-3">
+        <h4>User Profile</h4>
+        <div id ="profileDiv">
+      </div>
+    </div>
     </div>
 </i></button>
   </div>

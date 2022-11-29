@@ -100,7 +100,6 @@ const loginUser = (user) => {
     headers: {
       "Content-Type": "application/json",
     },
-    
   });
 
   loginFetchPromise.then((Response) => {
@@ -200,16 +199,84 @@ async function getAllUsers() {
 }
 
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
-  fetch(serverAddress + "/user/muteUnmute", {
+  fetch(
+    serverAddress +
+      "/user/muteUnmute?adminNickName=" +
+      adminNickName +
+      "&userNickName=" +
+      userNickName +
+      "&status=" +
+      status,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+const switchStatus = (nickName) => {
+  fetch(serverAddress + "/user/awayOnline?nickName=" + nickName, {
     method: "PATCH",
-    body: JSON.stringify({
-      adminNickName: adminNickName,
-      userNickName: userNickName,
-      status: status,
-    }),
     headers: {
       "Content-Type": "application/json",
     },
+  });
+};
+
+const keepAlive = (userNickname) => {
+  fetch(serverAddress + "/user/keepAlive", {
+    method: "POST",
+    body: userNickname,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+const checkOfflineUsers = () => {
+  fetch(serverAddress + "/user/checkOfflineUsers", {
+    method: "GET",
+  });
+};
+
+const getUserByNickname = (userNickName) => {
+  const response = fetch(serverAddress + "/user/getUserByNickname", {
+    method: "POST",
+    body: userNickName,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  response.then((Response) => {
+    if (Response.ok) {
+      Response.text().then((text) => {
+        var user = JSON.parse(text);
+        console.log(user);
+        const row = document.createElement("div", user.id);
+        if (user.privacyStatus == "PUBLIC") {
+          document.getElementById("profileDiv").innerHTML = ` 
+          Nickname: ${user.nickName} <br> 
+          First name: ${user.firstName}<br>
+          Last name: ${user.firstName}<br>
+          Email name: ${user.lastName}<br>
+          Date Of Birth: ${user.dateOfBirth}<br>
+          Description: ${user.description}`;
+        }
+        if (user.privacyStatus == "PRIVATE") {
+          document.getElementById("profileDiv").innerHTML =
+            "This profile is private";
+        }
+        if (user.userType == "GUEST") {
+          document.getElementById("profileDiv").innerHTML = `
+          The user ${user.nickName} is a guest 
+          `;
+        }
+      });
+    } else {
+      alert("no such nickname ... error press on the nickname!");
+    }
   });
 };
 
@@ -223,5 +290,10 @@ export {
   getAllUsers,
   logoutUser,
   muteUnmuteUser,
-  getLatestMessages
+  keepAlive,
+  getLatestMessages,
+  checkOfflineUsers,
+  switchStatus,
+  getUserByNickname,
 };
+
