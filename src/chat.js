@@ -5,6 +5,7 @@ import {
   keepAlive,
   checkOfflineUsers,
   switchStatus,
+  getUserByNickname,
 } from "../src/rest";
 let id;
 let users = [];
@@ -43,95 +44,12 @@ $(() => {
     const row = document.createElement("tr", user.id);
     ifAdmin(user);
 
-    if (user.privacyStatus == "PUBLIC") {
-      row.innerHTML = `
-              <td><a id=${
-                user.id
-              } contextmenu="custom-menu" href="#" data-toggle="modal" data-target="#profileModal${
-        user.id
-      }">
-            ${ifAdmin(user)} <div class="${
-        user.userStatus
-      }-indicator"></div></a></td>
-             <i class="bi bi-person"></i></td>
-              <!-- start modal-->
-              <div class="modal fade" id="profileModal${user.id}">
-              <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Profile</h5>
-                  </div>
-                  <div class="modal-body">
-                    <div class="profileContent">
-                      Nickname: <span">${user.nickName}</span><br />
-                      First name: <span id="fnameNameP">${
-                        user.firstName
-                      }</span><br />
-                      Last name: <span id="lnameNameP">${
-                        user.lastName
-                      }</span><br />
-                      Date of birh: <span id="bdayNameP">${
-                        user.dateOfBirth
-                      }</span><br />
-                      Description: <span id="descriptionP">${
-                        user.description
-                      }</span><br />
-                      Email: <span id="emailP">${user.email}</span><br />
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              </div>
-              </div>
-              <!--end modal-->`;
-    } else {
-      row.innerHTML = `
-                <td><a id=${
-                  user.id
-                } contextmenu="custom-menu" href="#" data-toggle="modal" data-target="#profileModal${
-        user.id
-      }">
+    row.innerHTML = `
+                <td><a id=${user.id} contextmenu="custom-menu" href="#">
               ${ifAdmin(user)} <div class="${
-        user.userStatus
-      }-indicator"></div></a></td>
-               <i class="bi bi-person"></i></td>
-                <!-- start modal-->
-                <div class="modal fade" id="profileModal${user.id}">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Private profile</h5>
-                    </div>
-                    <div class="modal-body">
-                      <div class="profileContent">
-                        Nickname: <span">${user.nickName}</span><br />
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                </div>
-                <!--end modal-->`;
-    }
-
+      user.userStatus
+    }-indicator"></div></a></td>
+               <i class="bi bi-person"></i></td>`;
     list.appendChild(row);
   }
 
@@ -187,6 +105,9 @@ $(() => {
         if (sessionStorage.getItem("nickName") == user[0].nickName) {
           switchStatus(sessionStorage.getItem("nickName"));
         }
+        break;
+      case "contactInfo":
+        getUserByNickname(user[0].nickName);
         break;
     }
     $(".custom-menu").hide(100);
