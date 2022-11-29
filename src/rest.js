@@ -183,13 +183,8 @@ async function getAllUsers() {
 }
 
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
-  fetch(serverAddress + "/user/muteUnmute", {
+  fetch(serverAddress + "/user/muteUnmute?adminNickName=" + adminNickName + "&userNickName=" + userNickName + "&status=" + status, {
     method: "PATCH",
-    body: JSON.stringify({
-      adminNickName: adminNickName,
-      userNickName: userNickName,
-      status: status,
-    }),
     headers: {
       "Content-Type": "application/json",
     },

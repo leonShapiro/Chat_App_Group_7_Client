@@ -1,5 +1,10 @@
 import $ from "jquery";
-import { getAllUsers, muteUnmuteUser, keepAlive,checkOfflineUsers} from "../src/rest";
+import {
+  getAllUsers,
+  muteUnmuteUser,
+  keepAlive,
+  checkOfflineUsers,
+} from "../src/rest";
 let id;
 let users = [];
 $(() => {
@@ -12,8 +17,12 @@ $(() => {
       displayUsers();
     }, 15000);
 
-    setInterval(function () {keepAlive(sessionStorage.getItem("nickName"))}, 10000)
-    setInterval(function () {checkOfflineUsers()}, 21000)
+    setInterval(function () {
+      keepAlive(sessionStorage.getItem("nickName"));
+    }, 10000);
+    setInterval(function () {
+      checkOfflineUsers();
+    }, 21000);
   }
 
   async function displayUsers() {
@@ -32,7 +41,7 @@ $(() => {
     const list = document.querySelector("#user-list");
     const row = document.createElement("tr", user.id);
     ifAdmin(user);
-    
+
     if (user.privacyStatus == "PUBLIC") {
       row.innerHTML = `
               <td><a id=${
@@ -158,11 +167,10 @@ $(() => {
     const user = getUserById(id);
     switch ($(this).attr("data-action")) {
       case "mute":
-        let textButton = event.target.textContent;
         muteUnmuteUser(
           sessionStorage.getItem("nickName"),
           user[0].nickName,
-          textButton
+          "mute"
         );
         break;
 
@@ -171,7 +179,7 @@ $(() => {
         muteUnmuteUser(
           sessionStorage.getItem("nickName"),
           user[0].nickName,
-          textButton1
+          "unmute"
         );
         break;
     }
