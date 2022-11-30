@@ -153,8 +153,6 @@ async function getAllMesseges() {
     });
 }
 
-
-
 async function getLatestMessages() {
   let result;
   return await fetch(serverAddress + "/message/getLatest", {
@@ -167,7 +165,6 @@ async function getLatestMessages() {
       return data;
     });
 }
-
 
 const confirmUserAccount = (id) => {
   const esponse = fetch(serverAddress + "/auth/validateUser", {
@@ -260,7 +257,7 @@ const getUserByNickname = (userNickName) => {
           Nickname: ${user.nickName} <br> 
           First name: ${user.firstName}<br>
           Last name: ${user.firstName}<br>
-          Email name: ${user.lastName}<br>
+          Email: ${user.email}<br>
           Date Of Birth: ${user.dateOfBirth}<br>
           Description: ${user.description}`;
         }
@@ -296,4 +293,3 @@ export {
   switchStatus,
   getUserByNickname,
 };
-
