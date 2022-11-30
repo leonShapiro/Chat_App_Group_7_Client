@@ -274,7 +274,7 @@ const getUserByNickname = (userNickName) => {
           document.getElementById("profileDiv").innerHTML = ` 
           Nickname: ${user.nickName} <br> 
           First name: ${user.firstName}<br>
-          Last name: ${user.firstName}<br>
+          Last name: ${user.lastName}<br>
           Email: ${user.email}<br>
           Date Of Birth: ${user.dateOfBirth}<br>
           Description: ${user.description}`;
