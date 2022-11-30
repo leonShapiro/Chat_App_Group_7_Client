@@ -25,9 +25,16 @@ $(() => {
     setInterval(function () {
       keepAlive(sessionStorage.getItem("nickName"));
     }, 10000);
+
     setInterval(function () {
       checkOfflineUsers();
     }, 21000);
+
+    document.getElementById(
+      "myUserNickname"
+    ).innerHTML = `<h6><b>Hello user: </b><span style="color:#009D0D">${sessionStorage.getItem(
+      "nickName"
+    )}</span></h6><hr><br>`;
   }
 
   async function displayUsers() {
