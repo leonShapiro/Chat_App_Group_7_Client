@@ -6,10 +6,13 @@ import {
   checkOfflineUsers,
   switchStatus,
   getUserByNickname,
-  getLatestMessages
+  getLatestMessages,
+  getMessagesByScroll,
 } from "../src/rest";
 let id;
 let users = [];
+let messages=[];
+
 $(() => {
   if (document.URL.includes("chat")) {
     if (sessionStorage.getItem("token") == null) {
@@ -29,7 +32,8 @@ $(() => {
   }
 
 
- 
+
+
   async function displayUsers() {
     try {
       $("#user-list").empty();
@@ -41,20 +45,54 @@ $(() => {
       console.log(e);
     }
   }
-
-   displayMessages();
-
   async function displayMessages() {
     try {
+
        $("#main-chat").empty();
       let textArea = $("#main-chat");
-      const messages = await getLatestMessages();
+      messages = await getLatestMessages();
       messages.forEach(message => {
-      textArea.val(textArea.val() + "\n" + message.sender + ": " + message.content);});
+      textArea.val(textArea.val() + "\n" + message.sender + ": " + message.content);
+    });
     } catch (e) {
       console.log(e);
     }
   }
+
+    async function displayMessages_v(messages) {
+    
+    try {
+      
+      let textArea = $("#main-chat");
+      $("#main-chat").empty();
+        console.log(messages);
+      for(let i=messages.length-1; i>0; i--)
+      {
+       textArea.val( messages[i].sender + ": " + messages[i].content+ "\n" +textArea.val() );
+      }
+      // messages.forEach(message => {
+      // });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+    let clicks=0;
+  $("#load-msg-btn").on("click", async() => {
+    clicks +=1;
+    messages = await getMessagesByScroll(clicks);
+    $("#main-chat").empty();
+    displayMessages_v(messages);
+     scrollDown();
+   
+  });
+
+
+ function scrollDown(){
+  var $textarea = $("#main-chat");
+  let st = $(this).scrollTop(); //get current scroll position
+  $textarea.scrollTop($textarea[0].scrollTo(0, 500));
+}
 
   function addUserToList(user) {
     const list = document.querySelector("#user-list");
@@ -72,19 +110,21 @@ $(() => {
 
   function ifAdmin(user) {
     if (user.userType == "ADMIN") return "*" + user.nickName;
-    else return user.nickName;
+    if(user.userType == "GUEST") return "Guest-" +user.nickName;
+    return user.nickName;
   }
 
   function getUserById(id) {
     const user = users.filter((user) => user.id == id);
-    console.log();
     return user;
   }
+
+
+
 
   // Trigger action when the contexmenu is about to be shown
   $("#user-list").on("contextmenu", function (event) {
     id = event.target.id;
-    console.log(id);
     event.preventDefault();
     $(".custom-menu")
       .finish()
@@ -102,7 +142,6 @@ $(() => {
 
   $(".custom-menu li").on("click", function (event) {
     const user = getUserById(id);
-    console.log(user[0].nickName);
     switch ($(this).attr("data-action")) {
       case "mute":
         muteUnmuteUser(
