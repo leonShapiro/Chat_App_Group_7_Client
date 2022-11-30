@@ -7,7 +7,7 @@ import {
   getAllMesseges,
   confirmUserAccount,
   logoutUser,
-  getLatestMessages
+  getLatestMessages,
 } from "./rest";
 import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
@@ -40,9 +40,6 @@ $(() => {
       $("#send-btn").click();
     }
   });
-
-
-
 
   $("#login-btn").on("click", () => {
     const user = {
@@ -129,6 +126,12 @@ async function exportChat() {
     console.log(e);
   }
 }
+
+document.getElementById(
+  "myUserNickname"
+).innerHTML = `<h6><b>Hello user: </b><span style="color:#009D0D">${sessionStorage.getItem(
+  "nickName"
+)}</span></h6><hr><br>`;
 
 openConnection();
 export { exportChat };
