@@ -141,7 +141,6 @@ const logoutUser = (user) => {
 };
 
 async function getAllMesseges() {
-  let result;
   return await fetch(serverAddress + "/message/getAll", {
     method: "GET",
   })
@@ -154,7 +153,6 @@ async function getAllMesseges() {
 }
 
 async function getLatestMessages() {
-  let result;
   return await fetch(serverAddress + "/message/getLatest", {
     method: "GET",
   })
@@ -195,22 +193,19 @@ async function getAllUsers() {
     });
 }
 
-
-
-async function  getMessagesByScroll(counter)
-{
-   let result;
-  return await fetch(serverAddress + "/message/getLatestChunks?chunks="+ counter
-  ,{
-    method: "GET",
-  })
+async function getMessagesByScroll(counter) {
+  return await fetch(
+    serverAddress + "/message/getLatestChunks?chunks=" + counter,
+    {
+      method: "GET",
+    }
+  )
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       return data;
     });
-
 }
 
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
@@ -296,7 +291,6 @@ const getUserByNickname = (userNickName) => {
 };
 
 export {
-  
   createUser,
   createMessage,
   loginUser,
