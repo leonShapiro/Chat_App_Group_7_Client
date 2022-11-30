@@ -141,7 +141,7 @@ $(() => {
         muteUnmuteUser(
           sessionStorage.getItem("nickName"),
           user[0].nickName,
-          textButton1
+          "unmute"
         );
         break;
 
