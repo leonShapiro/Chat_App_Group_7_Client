@@ -6,12 +6,11 @@ import {
   checkOfflineUsers,
   switchStatus,
   getUserByNickname,
-  getLatestMessages,
   getMessagesByScroll,
 } from "../src/rest";
 let id;
 let users = [];
-let messages=[];
+let messages = [];
 
 $(() => {
   if (document.URL.includes("chat")) {
@@ -31,9 +30,6 @@ $(() => {
     }, 21000);
   }
 
-
-
-
   async function displayUsers() {
     try {
       $("#user-list").empty();
@@ -45,54 +41,40 @@ $(() => {
       console.log(e);
     }
   }
-  async function displayMessages() {
-    try {
 
-       $("#main-chat").empty();
-      let textArea = $("#main-chat");
-      messages = await getLatestMessages();
-      messages.forEach(message => {
-      textArea.val(textArea.val() + "\n" + message.sender + ": " + message.content);
-    });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-    async function displayMessages_v(messages) {
-    
+  async function displayMessages_v(messages) {
     try {
-      
       let textArea = $("#main-chat");
       $("#main-chat").empty();
-        console.log(messages);
-      for(let i=messages.length-1; i>0; i--)
-      {
-       textArea.val( messages[i].sender + ": " + messages[i].content+ "\n" +textArea.val() );
+      console.log(messages);
+      for (let i = messages.length - 1; i > 0; i--) {
+        textArea.val(
+          messages[i].sender +
+            ": " +
+            messages[i].content +
+            "\n" +
+            textArea.val()
+        );
       }
-      // messages.forEach(message => {
-      // });
     } catch (e) {
       console.log(e);
     }
   }
 
-    let clicks=0;
-  $("#load-msg-btn").on("click", async() => {
-    clicks +=1;
+  let clicks = 0;
+  $("#load-msg-btn").on("click", async () => {
+    clicks += 1;
     messages = await getMessagesByScroll(clicks);
     $("#main-chat").empty();
     displayMessages_v(messages);
-     scrollDown();
-   
+    scrollDown();
   });
 
-
- function scrollDown(){
-  var $textarea = $("#main-chat");
-  let st = $(this).scrollTop(); //get current scroll position
-  $textarea.scrollTop($textarea[0].scrollTo(0, 500));
-}
+  function scrollDown() {
+    var $textarea = $("#main-chat");
+    let st = $(this).scrollTop(); //get current scroll position
+    $textarea.scrollTop($textarea[0].scrollTo(0, 500));
+  }
 
   function addUserToList(user) {
     const list = document.querySelector("#user-list");
@@ -110,7 +92,7 @@ $(() => {
 
   function ifAdmin(user) {
     if (user.userType == "ADMIN") return "*" + user.nickName;
-    if(user.userType == "GUEST") return "Guest-" +user.nickName;
+    if (user.userType == "GUEST") return "Guest-" + user.nickName;
     return user.nickName;
   }
 
@@ -118,9 +100,6 @@ $(() => {
     const user = users.filter((user) => user.id == id);
     return user;
   }
-
-
-
 
   // Trigger action when the contexmenu is about to be shown
   $("#user-list").on("contextmenu", function (event) {
@@ -160,8 +139,12 @@ $(() => {
         break;
 
       case "SwitchStatus":
-        if (sessionStorage.getItem("nickName") == user[0].nickName) {
-          switchStatus(sessionStorage.getItem("nickName"));
+        let temp = sessionStorage.getItem("nickName");
+        if (temp.startsWith("Guest-")) {
+          temp = sessionStorage.getItem("nickName").replace("Guest-", "");
+        }
+        if (temp == user[0].nickName) {
+          switchStatus(temp);
         }
         break;
       case "contactInfo":
