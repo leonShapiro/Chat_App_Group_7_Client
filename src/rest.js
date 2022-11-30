@@ -198,6 +198,24 @@ async function getAllUsers() {
     });
 }
 
+
+
+async function  getMessagesByScroll(counter)
+{
+   let result;
+  return await fetch(serverAddress + "/message/getLatestChunks?chunks="+ counter
+  ,{
+    method: "GET",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      return data;
+    });
+
+}
+
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
   fetch(
     serverAddress +
@@ -281,6 +299,7 @@ const getUserByNickname = (userNickName) => {
 };
 
 export {
+  
   createUser,
   createMessage,
   loginUser,
@@ -295,5 +314,6 @@ export {
   checkOfflineUsers,
   switchStatus,
   getUserByNickname,
+  getMessagesByScroll,
 };
 
