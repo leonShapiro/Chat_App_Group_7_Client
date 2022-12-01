@@ -1,6 +1,6 @@
 import { serverAddress } from "./constants";
 
-const urlstr = "http://localhost:9000/pages/confirmation.html?id=";
+const urlstr = "http://localhost:9000/pages/confirmation";
 
 const createUser = (user) => {
   sessionStorage.setItem("registerEmail", user.email);
@@ -145,8 +145,8 @@ async function getAllMesseges() {
     method: "GET",
   })
     .then(function (response) {
-      if(response.ok){
-      return response.json();
+      if (response.ok) {
+        return response.json();
       }
     })
     .then(function (data) {
@@ -159,8 +159,8 @@ async function getLatestMessages() {
     method: "GET",
   })
     .then(function (response) {
-       if(response.ok){
-      return response.json();
+      if (response.ok) {
+        return response.json();
       }
     })
     .then(function (data) {
@@ -168,10 +168,13 @@ async function getLatestMessages() {
     });
 }
 
-const confirmUserAccount = (id) => {
+const confirmUserAccount = (activationRequest) => {
   const esponse = fetch(serverAddress + "/auth/validateUser", {
     method: "POST",
-    body: JSON.stringify(id),
+    body: JSON.stringify({
+      id: activationRequest.id,
+      code: activationRequest.code,
+    }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -206,14 +209,12 @@ async function getMessagesByScroll(counter) {
   )
     .then(function (response) {
       return response.json();
-     
     })
     .then(function (data) {
       return data;
     })
-    .catch((err)=>console.log(("No more messages")))}
-
-  
+    .catch((err) => console.log("No more messages"));
+}
 
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
   fetch(
