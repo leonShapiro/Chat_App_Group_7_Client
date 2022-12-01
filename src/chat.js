@@ -53,7 +53,6 @@ $(() => {
     try {
       let textArea = $("#main-chat");
       $("#main-chat").empty();
-      console.log(messages);
       for (let i = messages.length - 1; i > 0; i--) {
         textArea.val(
           messages[i].sender +
@@ -72,10 +71,30 @@ $(() => {
   $("#load-msg-btn").on("click", async () => {
     clicks += 1;
     messages = await getMessagesByScroll(clicks);
+    if(messages == 0)
+      alert("No more messages");
     $("#main-chat").empty();
     displayMessages_v(messages);
     scrollDown();
   });
+
+    $("#export-btn").on("click", async () => {
+    if(messages.length == 0)
+    messages = await getMessagesByScroll(1);
+    var jsonObj = messages.map((o) => o.sender +" : " + o.content);
+    var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
+    downloadCSV(jsonObject);
+  });
+
+  function downloadCSV(csvStr) {
+  var hiddenElement = document.createElement("a");
+  hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
+  hiddenElement.target = "_blank";
+  hiddenElement.download = "Exported chat.csv";
+  hiddenElement.click();
+}
+
+  
 
   function scrollDown() {
     var $textarea = $("#main-chat");

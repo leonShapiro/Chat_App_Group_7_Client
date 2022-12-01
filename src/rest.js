@@ -145,7 +145,9 @@ async function getAllMesseges() {
     method: "GET",
   })
     .then(function (response) {
+      if(response.ok){
       return response.json();
+      }
     })
     .then(function (data) {
       return data;
@@ -157,7 +159,9 @@ async function getLatestMessages() {
     method: "GET",
   })
     .then(function (response) {
+       if(response.ok){
       return response.json();
+      }
     })
     .then(function (data) {
       return data;
@@ -202,11 +206,14 @@ async function getMessagesByScroll(counter) {
   )
     .then(function (response) {
       return response.json();
+     
     })
     .then(function (data) {
       return data;
-    });
-}
+    })
+    .catch((err)=>console.log(("No more messages")))}
+
+  
 
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
   fetch(

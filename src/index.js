@@ -95,31 +95,9 @@ $(() => {
     var id = queryString.substring(queryString.lastIndexOf("=") + 1);
     confirmUserAccount(id);
   });
-
-  $("#export-btn").on("click", async () => {
-    const messages = await getLatestMessages();
-    var jsonObj = messages.map((o) => Object.values(o).join(" : "));
-    var jsonObject = JSON.stringify(jsonObj, "dontHave", "\t");
-    downloadCSV(jsonObject);
-  });
 });
 
-function downloadCSV(csvStr) {
-  var hiddenElement = document.createElement("a");
-  hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csvStr);
-  hiddenElement.target = "_blank";
-  hiddenElement.download = "Exported chat.csv";
-  hiddenElement.click();
-}
 
-async function exportChat() {
-  try {
-    const messages = await getAllMesseges();
-    console.log(messages);
-  } catch (e) {
-    console.log(e);
-  }
-}
+
 
 openConnection();
-export { exportChat };
