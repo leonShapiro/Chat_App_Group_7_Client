@@ -4,10 +4,8 @@ import {
   loginUser,
   createMessage,
   createGuest,
-  getAllMesseges,
   confirmUserAccount,
   logoutUser,
-  getLatestMessages,
 } from "./rest";
 import { openConnection, sendPlainMessage } from "./sockets";
 import "bootstrap";
