@@ -220,14 +220,16 @@ async function getMessagesByScroll(counter) {
 const muteUnmuteUser = (adminNickName, userNickName, status) => {
   fetch(
     serverAddress +
-      "/user/muteUnmute?adminNickName=" +
-      adminNickName +
-      "&userNickName=" +
+      "/user/muteUnmute?userNickName=" +
       userNickName +
       "&status=" +
       status,
     {
       method: "PATCH",
+      body: JSON.stringify({
+        nickName: adminNickName,
+        token: sessionStorage.getItem("token"),
+      }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -236,8 +238,12 @@ const muteUnmuteUser = (adminNickName, userNickName, status) => {
 };
 
 const switchStatus = (nickName) => {
-  fetch(serverAddress + "/user/awayOnline?nickName=" + nickName, {
+  fetch(serverAddress + "/user/awayOnline", {
     method: "PATCH",
+    body: JSON.stringify({
+      nickName: nickName,
+      token: sessionStorage.getItem("token"),
+    }),
     headers: {
       "Content-Type": "application/json",
     },
