@@ -46,8 +46,9 @@ $(() => {
   });
 
   $("#logOut-btn").on("click", () => {
-    const user = sessionStorage.getItem("nickName");
-    logoutUser(user);
+    const nickName = sessionStorage.getItem("nickName");
+    const token = sessionStorage.getItem("token");
+    logoutUser(nickName,token);
   });
 
   $("#reg-btn").on("click", () => {

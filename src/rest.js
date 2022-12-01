@@ -54,9 +54,9 @@ const createGuest = (user) => {
   joinAsGuestPromise.then((Response) => {
     if (Response.ok) {
       Response.text().then((text) => {
-        const myArray = text.split(":");
-        sessionStorage.setItem("nickName", myArray[0]);
-        sessionStorage.setItem("token", myArray[1]);
+        var user = JSON.parse(text);
+        sessionStorage.setItem("nickName", user.nickName);
+        sessionStorage.setItem("token", user.token);
         window.location.replace("./pages/chat.html");
       });
     } else {
@@ -105,9 +105,9 @@ const loginUser = (user) => {
   loginFetchPromise.then((Response) => {
     if (Response.ok) {
       Response.text().then((text) => {
-        const myArray = text.split(":");
-        sessionStorage.setItem("nickName", myArray[0]);
-        sessionStorage.setItem("token", myArray[1]);
+        var user = JSON.parse(text);
+        sessionStorage.setItem("nickName", user.nickName);
+        sessionStorage.setItem("token", user.token);
         window.location.replace("./pages/chat.html");
       });
     } else {
@@ -120,11 +120,12 @@ const loginUser = (user) => {
   });
 };
 
-const logoutUser = (user) => {
+const logoutUser = (nickName,token) => {
   const loginFetchPromise = fetch(serverAddress + "/auth/logout", {
     method: "POST",
     body: JSON.stringify({
-      nickName: user,
+      nickName: nickName,
+      token : token
     }),
     headers: {
       "Content-Type": "application/json",
