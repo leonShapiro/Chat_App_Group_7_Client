@@ -15,7 +15,6 @@ import "./chat";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 $(() => {
-
   $("#send-btn").on("click", () => {
     const message = $("#message-input").val();
     if (message != "") {
@@ -92,12 +91,18 @@ $(() => {
 
   $("#confirm-btn").on("click", () => {
     const queryString = window.location.search;
-    var id = queryString.substring(queryString.lastIndexOf("=") + 1);
-    confirmUserAccount(id);
+    var code = queryString.substring(queryString.lastIndexOf("=") + 1);
+    var startindex = queryString.indexOf("=") + 1;
+    var endindex = queryString.indexOf("?", startindex);
+    var id = queryString.substring(startindex, endindex);
+    console.log(code);
+    console.log(id);
+    var activationRequest = {
+      id: id,
+      code: code,
+    };
+    confirmUserAccount(activationRequest);
   });
 });
-
-
-
 
 openConnection();
