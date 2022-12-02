@@ -120,12 +120,12 @@ const loginUser = (user) => {
   });
 };
 
-const logoutUser = (nickName,token) => {
+const logoutUser = (nickName, token) => {
   const loginFetchPromise = fetch(serverAddress + "/auth/logout", {
     method: "POST",
     body: JSON.stringify({
       nickName: nickName,
-      token : token
+      token: token,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -174,7 +174,7 @@ const confirmUserAccount = (activationRequest) => {
     method: "POST",
     body: JSON.stringify({
       id: activationRequest.id,
-      code: activationRequest.code,
+      activationCode: activationRequest.activationCode,
     }),
     headers: {
       "Content-Type": "application/json",

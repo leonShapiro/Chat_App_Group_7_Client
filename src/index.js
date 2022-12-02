@@ -45,7 +45,7 @@ $(() => {
   $("#logOut-btn").on("click", () => {
     const nickName = sessionStorage.getItem("nickName");
     const token = sessionStorage.getItem("token");
-    logoutUser(nickName,token);
+    logoutUser(nickName, token);
   });
 
   $("#reg-btn").on("click", () => {
@@ -90,15 +90,15 @@ $(() => {
 
   $("#confirm-btn").on("click", () => {
     const queryString = window.location.search;
-    var code = queryString.substring(queryString.lastIndexOf("=") + 1);
+    var activationCode = queryString.substring(
+      queryString.lastIndexOf("=") + 1
+    );
     var startindex = queryString.indexOf("=") + 1;
     var endindex = queryString.indexOf("?", startindex);
     var id = queryString.substring(startindex, endindex);
-    console.log(code);
-    console.log(id);
     var activationRequest = {
       id: id,
-      code: code,
+      activationCode: activationCode,
     };
     confirmUserAccount(activationRequest);
   });
