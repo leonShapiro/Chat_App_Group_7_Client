@@ -60,9 +60,14 @@ const createGuest = (user) => {
         window.location.replace("./pages/chat.html");
       });
     } else {
-      window.alert(
-        "The nickname is already taken, please choose a different one"
-      );
+      // window.alert(
+      //   "The nickname is already taken, please choose a different one"
+      // );
+      Response.text().then((text) => {
+        const errorArray = text.split(",");
+        const errorMessage = errorArray[3].split('"');
+        window.alert(errorMessage[3]);
+      });
     }
   });
 };
