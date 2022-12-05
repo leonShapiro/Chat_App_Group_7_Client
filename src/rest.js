@@ -266,7 +266,7 @@ const keepAlive = (userNickname) => {
 };
 
 const checkOfflineUsers = () => {
-  fetch(serverAddress + "/user/checkOfflineUsers", {
+  fetch(serverAddress + "/auth/checkOfflineUsers", {
     method: "GET",
   });
 };
